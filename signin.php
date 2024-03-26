@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start()
 if($_SERVER['REQUEST_METHOD']=='POST'){
 	include 'connect.php';
 	$reg_no=$_POST['reg_no'];
