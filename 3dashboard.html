@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Welcome</title>
+	<title>LBSITW</title>
 	
 	<link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="20x20">
 
@@ -31,34 +31,6 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
-	<style>
-        /* Style for modal */
-        .modal-bg {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            overflow: auto;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            animation-name: modalopen;
-            animation-duration: 0.5s;
-        }
-        @keyframes modalopen {
-            from {opacity: 0}
-            to {opacity: 1}
-        }
-    </style>
 	
 
 </head>
@@ -112,9 +84,9 @@
 						</div>
 						<ul>
 							<li>
-								<a href="user1.html" class="active">Dashboard</a>
+								<a href="index.html" class="active">Dashboard</a>
 							</li>
-							<li><a href="#" id="editProfileBtn">Edit Profile</a></li>
+							<li><a href="about-us.html">Edit Profile</a></li>
 							
 							<li>
 								<a href="case-study.html">Notifications</a>
@@ -136,9 +108,8 @@
 		
 	</div>
 </nav>
-</header>
 <!-- Menu end -->
-<!--  Header area end -->
+
 
 <!-- Breadcrumb Start -->
 
@@ -147,7 +118,7 @@
     	<div class="row align-items-center">
          	<div class="col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
             	<div class="breadcrumb-content">
-               		<h1>Welcome Nayza!!!</h1>
+               		
             	</div>
         	</div>
 			
@@ -157,60 +128,9 @@
 </div>
 <!-- Breadcrumb End -->
 
-<!-- Profile -->
-<div class="student-profile py-4">
-	<div class="container">
-	  <div class="row">
-		<div class="col-lg-4">
-		  <div class="card shadow-sm">
-			<div class="card-header bg-transparent text-center">
-			  <img class="profile_img" src="assets/images/users/user-1.jpg" alt="student dp">
-			  <h3>Nayza</h3>
-			</div>
-		  </div>
-		</div>
-		<div class="col-lg-8">
-		  <div class="card shadow-sm">
-			<div class="card-header bg-transparent border-0">
-			  
-			</div>
-			<div class="card-body pt-0">
-			  <table class="table">
-				<tr>
-				  <th width="30%">Register no </th>
-				  <td>LBT19CS123</td>
-				</tr>
-				<tr>
-				  <th width="30%">Department</th>
-				  <td>Computer Science</td>
-				</tr>
-				<tr>
-				  <th width="30%">Year of Graduation</th>
-				  <td>2023</td>
-				</tr>
-				<tr>
-				  <th width="30%">Current Position</th>
-				  <td>Senior Software Engineer at Target</td>
-				</tr>
-				
-			  </table>
-			</div>
-		  </div>
-			<div style="height: 26px"></div>
-		  <div class="card shadow-sm">
-			<div class="card-header bg-transparent border-0">
-			  <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
-			</div>
-			<div class="card-body pt-0">
-				<p>Email: emily.nayza@example.com<br>
-					LinkedIn: linkedin.com/in/nayza</p>
-			</div>
-		  </div>
-		</div>
-	  </div>
-	</div>
-  </div>
-<!-- Profile End -->
+
+</header>
+<!--  Header area end -->
 
 <!-- Footer Area Start -->
 
@@ -285,47 +205,6 @@
 <script src="assets/js/viewport.jquery.js"></script>
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
-<div id="editProfileModal" class="modal-bg">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2>Edit Profile</h2>
-        <!-- Form fields for editing profile details -->
-        <form id="profileForm">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name"><br>
-            <label for="regNumber">Register Number:</label><br>
-            <input type="text" id="regNumber" name="regNumber"><br>
-            <label for="department">Department:</label><br>
-            <input type="text" id="department" name="department"><br>
-            <label for="graduationYear">Year of Graduation:</label><br>
-            <input type="text" id="graduationYear" name="graduationYear"><br>
-            <label for="jobPosition">Current Job Position:</label><br>
-            <input type="text" id="jobPosition" name="jobPosition"><br><br>
-            <input type="submit" value="Save">
-        </form>
-    </div>
-</div>
-
-<!-- Your existing JavaScript code -->
-<script>
-    // Function to open the modal
-    function openModal() {
-        var modal = document.getElementById('editProfileModal');
-        modal.style.display = "block";
-    }
-
-    // Function to close the modal
-    function closeModal() {
-        var modal = document.getElementById('editProfileModal');
-        modal.style.display = "none";
-    }
-
-    // Event listener for the "Edit Profile" link
-    document.getElementById("editProfileBtn").addEventListener("click", function(event) {
-        event.preventDefault(); // Prevent default link behavior
-        openModal(); // Open the modal
-    });
-</script>
 
 </body>
 
