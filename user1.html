@@ -60,6 +60,48 @@
             display: block;
             margin-top: 10px;
         }
+		.modal-bg {
+			display: none;
+			position: fixed;
+			z-index: 9999;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			overflow: auto;
+		}
+		.modal-content {
+			background-color: #ffffff;
+			margin: 5% auto; 
+			padding: 30px; 
+			border: 2px solid rgb(203, 175, 240);
+			max-width: 600px;
+			width: 30%; 
+			height:70%;
+			box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2);
+			animation-name: modalopen;
+			animation-duration: 0.5s;
+		}
+		@keyframes modalopen {
+			from {opacity: 0}
+			to {opacity: 1}
+		}
+		input[type=text] {
+			width: 100%;
+			border-radius: 30px;
+		}
+		input[type=email] {
+			width: 100%;
+			border-radius: 30px;
+		}
+		input[type=submit] {
+			width: 50%;
+			align-items: center;
+			color: #F6F6F6;
+			background-color: rgb(101, 101, 211);
+			border-radius: 50px;
+		}
     </style>
 
 </head>
@@ -115,7 +157,7 @@
 							<li>
 								<a href="user1.html" class="active">Dashboard</a>
 							</li>
-							<li><a href="about-us.html">Edit Profile</a></li>
+							<li><a href="#" id="editProfileBtn">Edit Profile</a></li>
 							
 							<li>
 								<a href="#notification">Notifications</a>
@@ -219,35 +261,35 @@
 <h1 id="notification" style="text-align: center;">Notifications!!!</h1>
 <br>
 <br>
-    <div id="notifications-container">
-		<div class="notification">
-            <h3>Welcome to the Dashboard!</h3>
-            <p>There are no new announcements at the moment. Check back later!</p>
-			<img src="assets/images/cart-cta.png" alt="announcements">
-        </div>
+<div id="notifications-container">
+	<div class="notification">
+        <h3>Welcome to the Dashboard!</h3>
+        <p>There are no new announcements at the moment. Check back later!</p>
+		<img src="assets/images/cart-cta.png" alt="announcements">
     </div>
-    <script>
-        function fetchNotifications() {
-            fetch('fetch_notifications.php')
-                .then(response => response.json())
-                .then(data => {
-                    const notificationsContainer = document.getElementById('notifications-container');
-                    notificationsContainer.innerHTML = ''; 
-                    data.forEach(notification => {
-                        const notificationDiv = document.createElement('div');
-                        notificationDiv.classList.add('notification');
-                        notificationDiv.innerHTML = `
-                            <h3>${notification.title}</h3>
-                            <p>${notification.content}</p>
-                            <img src="${notification.image}" alt="Notification Image">
-                        `;
-                        notificationsContainer.appendChild(notificationDiv);
-                    });
-                })
-                .catch(error => console.error('Error fetching notifications:', error));
-        }
-        fetchNotifications();
-    </script>
+</div>
+<script>
+    function fetchNotifications() {
+        fetch('fetch_notifications.php')
+            .then(response => response.json())
+            .then(data => {
+                const notificationsContainer = document.getElementById('notifications-container');
+                notificationsContainer.innerHTML = ''; 
+                data.forEach(notification => {
+                    const notificationDiv = document.createElement('div');
+                    notificationDiv.classList.add('notification');
+                    notificationDiv.innerHTML = `
+                        <h3>${notification.title}</h3>
+                        <p>${notification.content}</p>
+                        <img src="${notification.image}" alt="Notification Image">
+                    `;
+                    notificationsContainer.appendChild(notificationDiv);
+                });
+            })
+            .catch(error => console.error('Error fetching notifications:', error));
+    }
+    fetchNotifications();
+</script>
 
 </div>
 <!-- Footer Area Start -->
@@ -323,6 +365,48 @@
 <script src="assets/js/viewport.jquery.js"></script>
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
+
+<div id="editProfileModal" class="modal-bg">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Edit Profile</h2>
+        <!-- Form fields for editing profile details -->
+        <form id="profileForm">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="regNumber">Register Number:</label><br>
+            <input type="text" id="regNumber" name="regNumber"><br>
+            <label for="department">Department:</label><br>
+            <input type="text" id="department" name="department"><br>
+            <label for="graduationYear">Year of Graduation:</label><br>
+            <input type="text" id="graduationYear" name="graduationYear"><br>
+            <label for="jobPosition">Current Job Position:</label><br>
+            <input type="text" id="jobPosition" name="jobPosition"><br>
+			<label for="email">Email:</label><br>
+        	<input type="email" id="email" name="email"><br><br>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+</div>
+<script>
+	function openModal() {
+		var modal = document.getElementById('editProfileModal');
+		modal.style.display = "block";
+	}
+
+	// Function to close the modal
+	function closeModal() {
+		var modal = document.getElementById('editProfileModal');
+		modal.style.display = "none";
+	}
+
+	// Event listener for the "Edit Profile" link
+	document.getElementById("editProfileBtn").addEventListener("click", function(event) {
+		event.preventDefault(); // Prevent default link behavior
+		openModal(); // Open the modal
+	});
+
+</script>
 
 </body>
 
