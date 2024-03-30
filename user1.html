@@ -31,7 +31,36 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
-	
+	<style>
+        /* Some basic CSS for styling */
+        #notifications-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .notification {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            flex: 1 0 calc(33.33% - 20px); /* Three containers in one row */
+            box-sizing: border-box;
+        }
+        .notification:last-child {
+            margin-right: 0;
+        }
+        .notification h3 {
+            margin-top: 0;
+        }
+        .notification p {
+            margin-bottom: 0;
+        }
+        .notification img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
 
 </head>
 <body>
@@ -89,11 +118,11 @@
 							<li><a href="about-us.html">Edit Profile</a></li>
 							
 							<li>
-								<a href="case-study.html">Notifications</a>
+								<a href="#notification">Notifications</a>
 								
 							</li>
 							
-							<li><a href="contact.html">Logout</a></li>
+							<li><a href="logout.html">Logout</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -183,7 +212,44 @@
 	</div>
   </div>
 <!-- Profile End -->
+<br>
+<br>
+<div>
+<br>
+<h1 id="notification" style="text-align: center;">Notifications!!!</h1>
+<br>
+<br>
+    <div id="notifications-container">
+		<div class="notification">
+            <h3>Welcome to the Dashboard!</h3>
+            <p>There are no new announcements at the moment. Check back later!</p>
+			<img src="assets/images/cart-cta.png" alt="announcements">
+        </div>
+    </div>
+    <script>
+        function fetchNotifications() {
+            fetch('fetch_notifications.php')
+                .then(response => response.json())
+                .then(data => {
+                    const notificationsContainer = document.getElementById('notifications-container');
+                    notificationsContainer.innerHTML = ''; 
+                    data.forEach(notification => {
+                        const notificationDiv = document.createElement('div');
+                        notificationDiv.classList.add('notification');
+                        notificationDiv.innerHTML = `
+                            <h3>${notification.title}</h3>
+                            <p>${notification.content}</p>
+                            <img src="${notification.image}" alt="Notification Image">
+                        `;
+                        notificationsContainer.appendChild(notificationDiv);
+                    });
+                })
+                .catch(error => console.error('Error fetching notifications:', error));
+        }
+        fetchNotifications();
+    </script>
 
+</div>
 <!-- Footer Area Start -->
 
 <div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-color: #F6F6F6;">
