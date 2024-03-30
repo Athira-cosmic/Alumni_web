@@ -34,15 +34,19 @@
 	<style>
         /* Some basic CSS for styling */
         #notifications-container {
+			background-color: 1px solid #19075f;
+			border-radius: 15px;
             display: flex;
+			padding: 25px;
             flex-wrap: wrap;
+			box-shadow: 0 2px 30px rgba(9, 2, 82, 0.637);
         }
         .notification {
             border: 1px solid #ccc;
             padding: 10px;
             margin-right: 20px;
             margin-bottom: 20px;
-            flex: 1 0 calc(33.33% - 20px); /* Three containers in one row */
+            flex: 1 0 calc(33.33% - 20px); 
             box-sizing: border-box;
         }
         .notification:last-child {
@@ -79,7 +83,7 @@
 			max-width: 600px;
 			width: 30%; 
 			height:70%;
-			box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2);
+			box-shadow: 0 2px 30px rgba(9, 2, 82, 0.637);
 			animation-name: modalopen;
 			animation-duration: 0.5s;
 		}
