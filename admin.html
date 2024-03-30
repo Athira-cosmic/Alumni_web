@@ -31,6 +31,58 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
+
+    <style>
+    .card {
+        background-color: 1px solid #19075f;
+        border-radius: 15px;
+        box-shadow: 0 2px 30px rgba(9, 2, 82, 0.637);
+        margin-bottom: 35px;
+        padding: 25px;
+    }
+    .card-body {
+        padding: 20px;
+    }
+    .card-widgets {
+        margin-bottom: 10px;
+    }
+    .card-widgets a {
+        color: #333;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+    .header-title {
+        color: #333;
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+    p {
+        color: #57487e;
+        margin-bottom: 20px;
+    }
+
+    #world-map-markers {
+        height: 50px;
+        background-color: #eeebf5;
+        border-radius: 10px;
+    }
+	button{
+		border-radius: 50px;
+	}
+	input[type=file]{
+		border-radius: 20px;
+		background-color: #57487e;
+		color: white;
+		width: 20%;
+	}
+	button[type=submit]{
+		border-radius: 20px;
+		background-color: #57487e;
+		color: white;
+		width: 10%;
+	}
+</style>
 	
 
 </head>
@@ -84,16 +136,13 @@
 						</div>
 						<ul>
 							<li>
-								<a href="index.html" class="active">Dashboard</a>
+								<a href="admin.html" class="active">Admin Dashboard</a>
 							</li>
-							<li><a href="about-us.html">Edit Profile</a></li>
 							
 							<li>
-								<a href="case-study.html">Notifications</a>
+								<a href="#notify">Announcements</a>
 								
 							</li>
-							
-							<li><a href="contact.html">Logout</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -114,13 +163,158 @@
 <!-- Breadcrumb Start -->
 
 <div class="breadcrumb-area positioning">
-   
+   <div class="container">
+    	<div class="row align-items-center">
+         	<div class="col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+            	<div class="breadcrumb-content">
+               		<h1>Admin-LBSITW</h1>
+            	</div>
+        	</div>
+      	</div>
+ 
+   	</div>
 </div>
 <!-- Breadcrumb End -->
 
 
 </header>
 <!--  Header area end -->
+
+<br>
+<!-- Membership Request -->
+<div class="row">
+	<div class="col-xl-4 col-md-12"style="width:100%">
+		<!-- Portlet card -->
+		<div class="card">
+			<div class="card-body">
+				<div class="card-widgets">
+					<a href="javascript: void(0);" data-bs-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+					<a data-bs-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+					<a href="javascript: void(0);" data-bs-toggle="remove"><i class="mdi mdi-close"></i></a>
+				</div>
+				<h4 class="header-title mb-0">Member Requests:</h4><br><br>
+				<div id="memberRequests" class="row">
+					<div class="col-lg-4 col-xl-4">
+						<div class="card text-center">
+							<div class="card-body">
+								<img src="assets/images/users/user-1.jpg" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+
+								<h4 class="mb-0">Nayza Thasneem</h4>
+								<p class="text-muted">LBT19CS124</p>
+
+								<button type="button" class="btn btn-success btn-xs waves-effect mb-2 waves-light" fdprocessedid="dymkp">ACCEPT</button>
+								<button type="button" class="btn btn-danger btn-xs waves-effect mb-2 waves-light" fdprocessedid="04t7y2">REJECT</button>
+							</div>
+						</div> <!-- end card -->
+					</div>
+				
+					<div class="col-lg-4 col-xl-4">
+						<div class="card text-center">
+							<div class="card-body">
+								<img src="assets/images/users/user-1.jpg" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+
+								<h4 class="mb-0">Revathy P</h4>
+								<p class="text-muted">LBT19CS145</p>
+
+								<button type="button" class="btn btn-success btn-xs waves-effect mb-2 waves-light" fdprocessedid="dymkp">ACCEPT</button>
+								<button type="button" class="btn btn-danger btn-xs waves-effect mb-2 waves-light" fdprocessedid="04t7y2">REJECT</button>
+							</div>
+						</div> <!-- end card -->
+					</div>
+				</div>
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+				<script>
+					// Function to add a new member request dynamically
+					function addMemberRequest(name, id) {
+						var requestHtml = `
+						<div class="col-lg-4 col-xl-4">
+							<div class="card text-center">
+								<div class="card-body">
+									<img src="assets/images/users/user-1.jpg" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
+									<h4 class="mb-0">${name}</h4>
+									<p class="text-muted">${id}</p>
+									<button type="button" class="btn btn-success btn-xs waves-effect mb-2 waves-light" fdprocessedid="dymkp">ACCEPT</button>
+									<button type="button" class="btn btn-danger btn-xs waves-effect mb-2 waves-light" fdprocessedid="04t7y2">REJECT</button>
+								</div>
+							</div> <!-- end card -->
+						</div>`;
+						
+						$('#memberRequests').append(requestHtml);
+					}
+				</script>
+			</div> <!-- end card-body -->
+		</div> <!-- end card-->
+	</div> <!-- end col-->
+</div>
+<!-- Membership Request End -->
+
+<br>
+<!-- Announcements-->
+<div class="row">
+	<div class="col-xl-6" style="width:100%">
+		<div class="card">
+			<div class="card-body">
+				<div class="card-widgets">
+					<a href="javascript: void(0);" data-bs-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+					<a data-bs-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>
+					<a href="javascript: void(0);" data-bs-toggle="remove"><i class="mdi mdi-close"></i></a>
+				</div>
+				<h4 class="header-title mb-0">Announcements:</h4><br><br>
+				<div class="mb-3">
+					<label for="validationCustom01" class="form-label">Title</label>
+					<input type="text" class="form-control" id="validationCustom01" placeholder="Events"  required />
+				</div>
+				<label>Image</label>
+				<input type="file"><br><br>
+				<div class="col-xl-6 col-lg-12 order-lg-2 order-xl-1" style="width: 100%;">
+					<!-- new post -->
+					<div class="card">
+						<div class="card-body p-0">
+							<ul class="nav nav-tabs nav-bordered">
+								<li class="nav-item">
+									<a href="#newpost" data-bs-toggle="tab" aria-expanded="false" class="nav-link active px-3 py-2">
+										<i class="mdi mdi-pencil-box-multiple font-18 d-md-none d-block"></i>
+										<span class="d-none d-md-block">Create Post</span>
+									</a>
+								</li>
+								
+								
+							</ul> <!-- end nav-->
+							<div class="tab-content pt-0">
+								<div class="tab-pane show active p-3" id="newpost">
+									<!-- comment box -->
+									<div class="border rounded">
+										<form action="#" class="comment-area-box">
+											<textarea rows="4" class="form-control border-0 resize-none" placeholder="Write something...."></textarea>
+											<div class="p-2 bg-light d-flex justify-content-between align-items-center">
+												<div>
+													<a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-image-outline"></i></a>
+													<a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-crosshairs-gps"></i></a>
+													<a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-attachment"></i></a>
+												</div>
+												<button type="submit" class="btn btn-sm btn-success"><i class='mdi mdi-send-outline me-1'></i>Post</button>
+											</div>
+										</form>
+									</div> <!-- end .border-->
+									<!-- end comment box -->
+								</div> <!-- end preview-->
+							</div> <!-- end tab-content-->
+						</div>
+					</div>
+					<!-- end new post -->
+			</div> <!-- end card-body -->
+		</div> <!-- end card-->
+	</div> <!-- end col -->
+
+   
+</div>
+<!-- end row -->
+
+    
+</div>
+<!-- Annoucement ends -->
 
 <!-- Footer Area Start -->
 
