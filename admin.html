@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Welcome</title>
+	<title>LBSITW</title>
 	
 	<link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="20x20">
 
@@ -31,78 +31,7 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
-	<style>
-        /* Some basic CSS for styling */
-        #notifications-container {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .notification {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-right: 20px;
-            margin-bottom: 20px;
-            flex: 1 0 calc(33.33% - 20px); /* Three containers in one row */
-            box-sizing: border-box;
-        }
-        .notification:last-child {
-            margin-right: 0;
-        }
-        .notification h3 {
-            margin-top: 0;
-        }
-        .notification p {
-            margin-bottom: 0;
-        }
-        .notification img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin-top: 10px;
-        }
-		.modal-bg {
-			display: none;
-			position: fixed;
-			z-index: 9999;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			background-color: rgba(0, 0, 0, 0.5);
-			overflow: auto;
-		}
-		.modal-content {
-			background-color: #ffffff;
-			margin: 5% auto; 
-			padding: 30px; 
-			border: 2px solid rgb(203, 175, 240);
-			max-width: 600px;
-			width: 30%; 
-			height:70%;
-			box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2);
-			animation-name: modalopen;
-			animation-duration: 0.5s;
-		}
-		@keyframes modalopen {
-			from {opacity: 0}
-			to {opacity: 1}
-		}
-		input[type=text] {
-			width: 100%;
-			border-radius: 30px;
-		}
-		input[type=email] {
-			width: 100%;
-			border-radius: 30px;
-		}
-		input[type=submit] {
-			width: 50%;
-			align-items: center;
-			color: #F6F6F6;
-			background-color: rgb(101, 101, 211);
-			border-radius: 50px;
-		}
-    </style>
+	
 
 </head>
 <body>
@@ -155,16 +84,16 @@
 						</div>
 						<ul>
 							<li>
-								<a href="user1.html" class="active">Dashboard</a>
+								<a href="index.html" class="active">Dashboard</a>
 							</li>
-							<li><a href="#" id="editProfileBtn">Edit Profile</a></li>
+							<li><a href="about-us.html">Edit Profile</a></li>
 							
 							<li>
-								<a href="#notification">Notifications</a>
+								<a href="case-study.html">Notifications</a>
 								
 							</li>
 							
-							<li><a href="logout.html">Logout</a></li>
+							<li><a href="contact.html">Logout</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -179,9 +108,8 @@
 		
 	</div>
 </nav>
-</header>
 <!-- Menu end -->
-<!--  Header area end -->
+
 
 <!-- Breadcrumb Start -->
 
@@ -193,105 +121,19 @@
                		<h1>Welcome Nayza!!!</h1>
             	</div>
         	</div>
-			
+			<div class="user-box text-left">
+				<img src="assets/images/users/user-1.jpg" alt="user-img" title="Mat Helme" width="10%;" class="rounded-circle avatar-md">
+			</div>
       	</div>
  
    	</div>
 </div>
 <!-- Breadcrumb End -->
 
-<!-- Profile -->
-<div class="student-profile py-4">
-	<div class="container">
-	  <div class="row">
-		<div class="col-lg-4">
-		  <div class="card shadow-sm">
-			<div class="card-header bg-transparent text-center">
-			  <img class="profile_img" src="assets/images/users/user-1.jpg" alt="student dp">
-			  <h3>Nayza</h3>
-			</div>
-		  </div>
-		</div>
-		<div class="col-lg-8">
-		  <div class="card shadow-sm">
-			<div class="card-header bg-transparent border-0">
-			  
-			</div>
-			<div class="card-body pt-0">
-			  <table class="table">
-				<tr>
-				  <th width="30%">Register no </th>
-				  <td>LBT19CS123</td>
-				</tr>
-				<tr>
-				  <th width="30%">Department</th>
-				  <td>Computer Science</td>
-				</tr>
-				<tr>
-				  <th width="30%">Year of Graduation</th>
-				  <td>2023</td>
-				</tr>
-				<tr>
-				  <th width="30%">Current Position</th>
-				  <td>Senior Software Engineer at Target</td>
-				</tr>
-				
-			  </table>
-			</div>
-		  </div>
-			<div style="height: 26px"></div>
-		  <div class="card shadow-sm">
-			<div class="card-header bg-transparent border-0">
-			  <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
-			</div>
-			<div class="card-body pt-0">
-				<p>Email: emily.nayza@example.com<br>
-					LinkedIn: linkedin.com/in/nayza</p>
-			</div>
-		  </div>
-		</div>
-	  </div>
-	</div>
-  </div>
-<!-- Profile End -->
-<br>
-<br>
-<div>
-<br>
-<h1 id="notification" style="text-align: center;">Notifications!!!</h1>
-<br>
-<br>
-<div id="notifications-container">
-	<div class="notification">
-        <h3>Welcome to the Dashboard!</h3>
-        <p>There are no new announcements at the moment. Check back later!</p>
-		<img src="assets/images/cart-cta.png" alt="announcements">
-    </div>
-</div>
-<script>
-    function fetchNotifications() {
-        fetch('fetch_notifications.php')
-            .then(response => response.json())
-            .then(data => {
-                const notificationsContainer = document.getElementById('notifications-container');
-                notificationsContainer.innerHTML = ''; 
-                data.forEach(notification => {
-                    const notificationDiv = document.createElement('div');
-                    notificationDiv.classList.add('notification');
-                    notificationDiv.innerHTML = `
-                        <h3>${notification.title}</h3>
-                        <p>${notification.content}</p>
-                        <img src="${notification.image}" alt="Notification Image">
-                    `;
-                    notificationsContainer.appendChild(notificationDiv);
-                });
-            })
-            .catch(error => console.error('Error fetching notifications:', error));
-    }
-    fetchNotifications();
-</script>
 
-</div>
+</header>
+<!--  Header area end -->
+
 <!-- Footer Area Start -->
 
 <div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-color: #F6F6F6;">
@@ -365,48 +207,6 @@
 <script src="assets/js/viewport.jquery.js"></script>
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
-
-<div id="editProfileModal" class="modal-bg">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2>Edit Profile</h2>
-        <!-- Form fields for editing profile details -->
-        <form id="profileForm">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name"><br>
-            <label for="regNumber">Register Number:</label><br>
-            <input type="text" id="regNumber" name="regNumber"><br>
-            <label for="department">Department:</label><br>
-            <input type="text" id="department" name="department"><br>
-            <label for="graduationYear">Year of Graduation:</label><br>
-            <input type="text" id="graduationYear" name="graduationYear"><br>
-            <label for="jobPosition">Current Job Position:</label><br>
-            <input type="text" id="jobPosition" name="jobPosition"><br>
-			<label for="email">Email:</label><br>
-        	<input type="email" id="email" name="email"><br><br>
-            <input type="submit" value="Save">
-        </form>
-    </div>
-</div>
-<script>
-	function openModal() {
-		var modal = document.getElementById('editProfileModal');
-		modal.style.display = "block";
-	}
-
-	// Function to close the modal
-	function closeModal() {
-		var modal = document.getElementById('editProfileModal');
-		modal.style.display = "none";
-	}
-
-	// Event listener for the "Edit Profile" link
-	document.getElementById("editProfileBtn").addEventListener("click", function(event) {
-		event.preventDefault(); // Prevent default link behavior
-		openModal(); // Open the modal
-	});
-
-</script>
 
 </body>
 
