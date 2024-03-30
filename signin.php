@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		$num=mysqli_num_rows($result);
 		if($num>0){
 			$_SESSION['reg_no']=$reg_no;
-			header("Location:dashboard.php");
+			header("Location:user1.php");
 			exit();
 		}else{
 			echo "Invalid data";
