@@ -144,7 +144,7 @@
 			<div class="row align-items-center">
 				<div class="col-xxl-3 col-xl-2 col-lg-2 col-sm-6 col-6 order-0 order-lg-0">
 					<div class="logo text-left">
-						<a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a>
+						<a href="index.php"><img src="assets/images/collegelogo2.png" alt=""></a>
 					</div>
 				</div>
 				<div class="col-xxl-7 col-xl-7 col-lg-7 col-sm-1 col-1 order-2 order-lg-1">
@@ -155,11 +155,11 @@
 					</a>
 					<nav class="main-nav">
 						<div class="logo mobile-ham-logo d-lg-none d-block text-left">
-							<a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a>
+							<a href="index.php"><img src="assets/images/collegelogo2.png" alt=""></a>
 						</div>
 						<ul>
 							<li>
-								<a href="user1.html" class="active">Dashboard</a>
+								<a href="user1.php" class="active">Dashboard</a>
 							</li>
 							<li><a href="#" id="editProfileBtn">Edit Profile</a></li>
 							
@@ -304,7 +304,7 @@
 			<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 				<div class="footer-logo-wrap" style="background-color: #f6f6f6;">
 					<!-- <div class="footer-logo"> -->
-						<!-- <a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a> -->
+						<!-- <a href="index.php"><img src="assets/images/collegelogo2.png" alt=""></a> -->
 					<!-- </div> -->
 				</div>
 			</div>
