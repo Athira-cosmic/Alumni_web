@@ -1,8 +1,8 @@
 <?php
 $HOSTNAME='localhost';
 $USERNAME='root';
-$PASSWORD='Athi@2003';
-$DATABASE='signupforms';
+$PASSWORD='chinnu11';
+$DATABASE='alumni';
 
 
 $con=mysqli_connect($HOSTNAME,$USERNAME,$PASSWORD,$DATABASE);

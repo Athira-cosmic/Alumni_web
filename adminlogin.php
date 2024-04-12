@@ -1,11 +1,36 @@
+<?php
+session_start();
+if($_SERVER['REQUEST_METHOD']=='POST'){
+	include 'connect.php';
+	$reg_no=$_POST['reg_no'];
+	$password=$_POST['password'];
+
+	$sql="Select * from `registration` where
+	reg_no='$reg_no' and password='$password'";
+
+	$result=mysqli_query($con,$sql);
+	if($result){
+		$num=mysqli_num_rows($result);
+		if($num>0){
+			$_SESSION['reg_no']=$reg_no;
+			header("Location:admin.html");
+			exit();
+		}else{
+			echo "Invalid data";
+			exit();
+		}
+	}
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
-<!-- Mirrored from themeforest.wprealizer.com/html-educoda-preview/educoda/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Apr 2023 05:52:46 GMT -->
+<!-- Mirrored from themeforest.wprealizer.com/html-educoda-preview/educoda/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Apr 2023 05:52:46 GMT -->
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Educoda - Education and Assignment Services HTML Template.</title>
+	<title>Sign In</title>
 	
 	<link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="20x20">
 
@@ -69,7 +94,7 @@
 			<div class="row align-items-center">
 				<div class="col-xxl-3 col-xl-2 col-lg-2 col-sm-6 col-6 order-0 order-lg-0">
 					<div class="logo text-left">
-						<a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a>
+						<a href="index.php"><img src="assets/images/collegelogo2.png" alt=""></a>
 					</div>
 				</div>
 				<div class="col-xxl-7 col-xl-7 col-lg-7 col-sm-1 col-1 order-2 order-lg-1">
@@ -80,20 +105,20 @@
 					</a>
 					<nav class="main-nav">
 						<div class="logo mobile-ham-logo d-lg-none d-block text-left">
-							<a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a>
+							<a href="index.php"><img src="assets/images/collegelogo2.png" alt=""></a>
 						</div>
 						<ul>
 							<li>
-								<a href="index.php">Home</a>
+								<a href="index.php" class="active">Home</a>
 							</li>
-							<li><a href="about-us.html">About</a></li>
+							<li><a href="#section1">About</a></li>
 							
 							<li>
 								<a href="case-study.html">Events</a>
 								
 							</li>
 							
-							<li><a href="contact.html" class="active">Contact</a></li>
+							<li><a href="contact.html">Contact</a></li>
 						</ul>
 						<div class="menu-btn-wrap d-block d-lg-none">
 							<a class="menu-btn" href="signin.php"><i class="bi bi-person"></i> Sign-In</a>
@@ -105,9 +130,9 @@
 				</div>
 				<div class="col-xxl-2 col-xl-3 col-lg-3 col-sm-5 col-5 order-1 order-lg-2">
 					<div class="menu-btn-wrap ">
-						<a class="menu-btn d-none d-lg-block" href="sign-in.html"><i class="bi bi-person"></i> Sign-In</a>
+						<a class="menu-btn d-none d-lg-block" href="signin.php"><i class="bi bi-person"></i> Sign-In</a>
 
-						<a class="menu-btn d-none d-lg-block" href="sign-up.html"><i class="bi bi-person"></i> Sign-up</a>
+						<a class="menu-btn d-none d-lg-block" href="signup.php"><i class="bi bi-person"></i> Sign-up</a>
 						
 						</div>
 					</div>
@@ -115,7 +140,13 @@
 			</div>
 		</div>
 	</div>
-	
+	<div class="menu-info-wrap d-none d-xxl-block position-absolute">
+		<div class="menu-info-shape position-relative">
+			<img src="assets/images/shape/menu.png" alt="">
+			<a href="https://themeforest.wprealizer.com/cdn-cgi/l/email-protection#e999869b889a9c8788c780878f86a98e84888085c78a8684"><i class="bi bi-envelope-fill"></i> <span class="__cf_email__" data-cfemail="aadac5d8cbd9dfc4cb84c3c4ccc5eacecfc7c584c9c5c7">[email&#160;protected]</span></a>
+		</div>
+		
+	</div>
 </nav>
 <!-- Menu end -->
 
@@ -127,16 +158,18 @@
       <div class="row align-items-center">
          <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
             <div class="breadcrumb-content">
-               <h1>Contact Us</h1>
+               <h1>Sign In</h1>
+               
             </div>
          </div>
          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mobt-24">
             <div class="breadcrumb-link text-start text-lg-end">
-               <h4><a href="index.html">Home</a> > Contact Us</h4>
+               <h4><a href="index.php">Home</a> > Sign In</h4>
             </div>
          </div>
       </div>
    </div>
+	<img class="shape breadcrumb-round-1 d-lg-block d-none" src="assets/images/shape/breadcrumb-round.png" alt="">
 </div>
 
 <!-- Breadcrumb End -->
@@ -146,20 +179,7 @@
 <!--  Header area end -->
 
 
-<!-- Map Start -->
 
-<div class="map-area mt-120">
-   <div class="container">
-      <div class="row">
-         <div class="col-lg-12">
-            <div class="location-map">
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3946.0865168960026!2d76.97028455026164!3d8.49096889386525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05ba511ecc0667%3A0xd23b5ccfdf2aab2b!2sLBS%20Institute%20Of%20Technology%20for%20Women%20Poojappura%20Thiruvananthapuram!5e0!3m2!1sen!2sin!4v1681140414744!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<!-- Map End -->
 
 
 <!-- Contact From Start -->
@@ -169,64 +189,28 @@
 		<div class="row align-items-center">
 			<div class="col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
             <div class="contact-title">
-               <h2>Good Comments</h2>
-               <p class="mt-2">Give your valuable feedback!!</p>
+               <h2>Sign In Now!</h2>
+               
+               
             </div>
-            <form id="contact-form" action="https://themeforest.wprealizer.com/html-educoda-preview/educoda/mail.php" method="POST" class="contact-input mt-5 position-relative">
+            <form action="signin.php" method="post" class="contact-input mt-5 position-relative">
                <div class="row">
-                  <div class="col-xl-6 col-lg-6 col-sm-12 col-12">
-                     <input type="text" name="name" placeholder="Name">
-                  </div>
-                  <div class="col-xl-6 col-lg-6 col-sm-12 col-12">
-                     <input type="email" name="email" placeholder="Email">
-                  </div>
                  
                   <div class="col-xl-12 col-lg-12 col-sm-12 col-12">
-                     <textarea name="message" id="message" cols="30" rows="3" placeholder="Additional Message"></textarea>
+                     <input type="text" name="reg_no" placeholder="Register no.">
+                  </div>
+                  <div class="col-xl-12 col-lg-12 col-sm-12 col-12">
+                     <input type="password" name="password" placeholder="Password">
+                  </div>
+                  <div class="col-xl-7 col-lg-10 col-sm-12 col-12">
+                     
                   </div>
                   <div class="contact-btn-wrap mt-5">
-                     <button type="submit" class="common-btn">Submit Now +</button>
+                     <button type="submit" class="common-btn">Sign In</button>
                   </div>
                   <p class="form-message"></p>
                </div>
             </form>
-			</div>
-			<div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mobt-60">
-				<div class="cart-wrap">
-					<div class="single-cart" style="background-color: #ECE9F6;">
-						<div class="cart-title">
-							<h3>Contact Info 24/7</h3>
-                     <p>Get in touch with us</p>
-						</div>
-						<div class="contact-info d-flex align-items-center mt-4">
-							<div class="contact-details-icon">
-                        <i class="bi bi-telephone-plus d-flex align-items-center justify-content-center"></i>
-                     </div>
-                     <div class="contact-details-info">
-                        <p>Contact Phone</p>
-                        <h3><a href="tel:01716900757">0471 2349232, 0471 2343395</a></h3>
-                     </div>
-						</div>
-						<div class="contact-info d-flex align-items-center mt-4">
-							<div class="contact-details-icon">
-                        <i class="bi bi-envelope d-flex align-items-center justify-content-center"></i>
-                     </div>
-                     <div class="contact-details-info">
-                        <p>Contact Mail</p>
-                        <h3>principal@lbsitw.ac.in</h3>
-                     </div>
-						</div>
-						<div class="contact-info d-flex align-items-center mt-4">
-							<div class="contact-details-icon">
-                        <i class="bi bi-geo-alt d-flex align-items-center justify-content-center"></i>
-                     </div>
-                     <div class="contact-details-info">
-                        <p>Contact Location</p>
-                        <h3>LBSITW, POOJAPURA, THIRUVANATHAPURAM-695012</h3>
-                     </div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -236,7 +220,6 @@
 
 
 <!-- Footer Area Start -->
-
 <div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-color: #F6F6F6;">
 	<div class="container">
 		<div class="row align-items-center footer-border">
@@ -292,7 +275,7 @@
 
 
 <!-- Jquery JS -->
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.6.0.min.js"></script>
+<script src="assets/js/jquery-3.6.0.min.js"></script>
 <!-- Jquery Ui JS -->
 <script src="assets/js/jquery-ui.js"></script>
 <!-- Bootstrap JS -->		
@@ -311,5 +294,5 @@
 
 </body>
 
-<!-- Mirrored from themeforest.wprealizer.com/html-educoda-preview/educoda/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Apr 2023 05:52:46 GMT -->
+<!-- Mirrored from themeforest.wprealizer.com/html-educoda-preview/educoda/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Apr 2023 05:52:46 GMT -->
 </html>

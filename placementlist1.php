@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
-$database = "signupforms";
+$password = "chinnu11";
+$database = "alumni";
 $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -338,7 +338,7 @@ echo "<!doctype html>
 																<h5 class='mb-4 text-uppercase'><i class='mdi mdi-briefcase me-1'></i>
 																	Other Details</h5>
 																<ul class='list-unstyled timeline-sm'>";
-																	$name="Total Offers";
+																	$name="NO. OF OFFERS";
 																	$sql="SELECT COMPANIES,TOTAL FROM placement_2021 where COMPANIES='$name'";
 																	$result = $conn->query($sql);
 																	$row=$result->fetch_assoc();
@@ -368,13 +368,13 @@ echo "<!doctype html>
 																		<p class='text-muted mt-2'>".$row["TOTAL"]."</p>
 																		<br>
 																	</li>";
-																	$name="Total Sudents Placed";
+																	$name="NO. OF STUDENTS PLACED";
 																	$sql="SELECT COMPANIES,TOTAL FROM placement_2021 where COMPANIES='$name'";
 																	$result = $conn->query($sql);
 																	$row=$result->fetch_assoc();
 																	echo "
 																	<li class='timeline-sm-item'>
-																		<h5 class='mt-0 mb-1'>".$name."</h5>
+																		<h5 class='mt-0 mb-1'>Total Sudents Placed</h5>
 																		<p class='text-muted mt-2'>".$row["TOTAL"]."</p>
 																		<br>
 																	</li>";
