@@ -1,7 +1,7 @@
 <?php
 $HOSTNAME='localhost';
 $USERNAME='root';
-$PASSWORD='root';
+$PASSWORD='Athi@2003';
 $DATABASE='signupforms';
 
 
