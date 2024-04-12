@@ -1,32 +1,25 @@
 <?php
 session_start();
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if($_SERVER['REQUEST_METHOD']=='POST'){
     include 'connect.php';
-    $reg_no = $_POST['reg_no'];
-    $password = $_POST['password'];
 
-    $sql = "SELECT * FROM `registration` WHERE reg_no='$reg_no' AND password='$password'";
-    $result = mysqli_query($con, $sql);
-    if ($result) {
-        $num = mysqli_num_rows($result);
-        if ($num > 0) {
-            // Fetch user details
-            $user_details = mysqli_fetch_assoc($result);
+    // Fetch form data
+    $reg_no=$_POST['reg_no'];
+    $password=$_POST['password'];
 
-            // Store user details in session
-            $_SESSION['user_details'] = $user_details;
-
-            // Redirect to user profile page
-            header("Location: user1.php");
-            exit();
-        } else {
-            echo "Invalid data";
-            exit();
-        }
+    // Verify user credentials
+    $sql="SELECT * FROM `registration` WHERE reg_no='$reg_no' AND password='$password' AND status='approved'";
+    $result=mysqli_query($con,$sql);
+    
+    if(mysqli_num_rows($result) == 1){
+        $_SESSION['user_logged_in'] = true;
+        $_SESSION['reg_no'] = $reg_no; // Store reg_no in session for later use
+        header('location:user1.php');
+    }else{
+        echo "Invalid credentials or user not approved by admin";
     }
 }
 ?>
-
 
 <!doctype html>
 <html lang="en">

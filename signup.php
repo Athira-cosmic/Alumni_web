@@ -1,40 +1,36 @@
 <?php
-
 if($_SERVER['REQUEST_METHOD']=='POST'){
-	include 'connect.php';
-	$reg_no=$_POST['reg_no'];
-	$name=$_POST['name'];
-	$email=$_POST['email'];
-	$password=$_POST['password'];
-	$ph_no=$_POST['ph_no'];
-	$address=$_POST['address'];
-	$year_of_passout=$_POST['year_of_passout'];
-	$course=$_POST['course'];
-	$department=$_POST['department'];
-	$company=$_POST['company'];
-	$designation=$_POST['designation'];
+    include 'connect.php';
+    
+    // Fetch form data
+    $reg_no=$_POST['reg_no'];
+    $name=$_POST['name'];
+    $email=$_POST['email'];
+    $password=$_POST['password'];
+    $ph_no=$_POST['ph_no'];
+    $address=$_POST['address'];
+    $year_of_passout=$_POST['year_of_passout'];
+    $course=$_POST['course'];
+    $department=$_POST['department'];
+    $company=$_POST['company'];
+    $designation=$_POST['designation'];
 
-	$sql="Select * from `registration` where 
-	reg_no='$reg_no'";
+    // Set initial status to 'pending'
+    $status = 'pending';
 
-	$result=mysqli_query($con,$sql);
-	if($result){
-		$num=mysqli_num_rows($result);
-		if($num>0){
-			echo "User already exist";
-			exit();
-		}else{
-			$sql="insert into `registration`(reg_no,name,email,password,ph_no,address,year_of_passout,course,department,company,designation)
-			values('$reg_no','$name','$email','$password','$ph_no','$address','$year_of_passout','$course','$department','$company','$designation')";
-			$result=mysqli_query($con,$sql);
-			if($result){
-				header('location:signin.php');
-			}else{
-				die(mysqli_error($con));
-			}
-		}
-	}
+    // Insert user data into the database
+    $sql="INSERT INTO `registration` (reg_no, name, email, password, ph_no, address, year_of_passout, course, department, company, designation, status)
+          VALUES ('$reg_no', '$name', '$email', '$password', '$ph_no', '$address', '$year_of_passout', '$course', '$department', '$company', '$designation', '$status')";
+
+    $result=mysqli_query($con,$sql);
+    
+    if($result){
+        header('location:signin.php');
+    }else{
+        echo "Error: " . mysqli_error($con);
+    }
 }
+
 ?>
 
 

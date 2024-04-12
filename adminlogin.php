@@ -1,27 +1,25 @@
 <?php
 session_start();
 if($_SERVER['REQUEST_METHOD']=='POST'){
-	include 'connect.php';
-	$reg_no=$_POST['reg_no'];
-	$password=$_POST['password'];
+    include 'connect.php';
 
-	$sql="Select * from `registration` where
-	reg_no='$reg_no' and password='$password'";
+    // Fetch form data
+    $reg_no=$_POST['reg_no'];
+    $password=$_POST['password'];
 
-	$result=mysqli_query($con,$sql);
-	if($result){
-		$num=mysqli_num_rows($result);
-		if($num>0){
-			$_SESSION['reg_no']=$reg_no;
-			header("Location:admin.html");
-			exit();
-		}else{
-			echo "Invalid data";
-			exit();
-		}
-	}
+    // Verify admin credentials
+    $sql="SELECT * FROM `admin` WHERE reg_no='$reg_no' AND password='$password'";
+    $result=mysqli_query($con,$sql);
+    
+    if(mysqli_num_rows($result) == 1){
+        $_SESSION['admin_logged_in'] = true;
+        header('location:admin.php');
+    }else{
+        echo "Invalid credentials";
+    }
 }
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -30,7 +28,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Sign In</title>
+	<title>Admin Login</title>
 	
 	<link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="20x20">
 
@@ -193,7 +191,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                
                
             </div>
-            <form action="signin.php" method="post" class="contact-input mt-5 position-relative">
+            <form action="adminlogin.php" method="post" class="contact-input mt-5 position-relative">
                <div class="row">
                  
                   <div class="col-xl-12 col-lg-12 col-sm-12 col-12">

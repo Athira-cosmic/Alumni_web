@@ -94,6 +94,10 @@
 							</li>
 							
 							<li><a href="contact.html">Contact</a></li>
+							<li>
+								<a href="adminlogin.php">Admin</a>
+								
+							</li>
 						</ul>
 						<div class="menu-btn-wrap d-block d-lg-none">
 							<a class="menu-btn" href="signin.php"><i class="bi bi-person"></i> Sign-In</a>
@@ -119,6 +123,7 @@
 	
 	</div>
 </nav>
+
 <!-- Menu end -->
 
 

@@ -1,3 +1,49 @@
+<?php
+session_start();
+include 'connect.php';
+
+// Function to fetch pending registration requests
+function fetchPendingRequests($con) {
+    $sql = "SELECT * FROM `registration` WHERE status='pending'";
+    $result = mysqli_query($con, $sql);
+    $requests = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $requests[] = $row;
+    }
+    return $requests;
+}
+
+// Handle approval
+if (isset($_GET['approve'])) {
+    $reg_no = $_GET['approve'];
+    $sql = "UPDATE `registration` SET status='approved' WHERE reg_no='$reg_no'";
+    $result = mysqli_query($con, $sql);
+    if ($result) {
+        header('location:admin.php');
+    } else {
+        echo "Error: " . mysqli_error($con);
+    }
+}
+
+// Handle rejection
+if (isset($_GET['reject'])) {
+    $reg_no = $_GET['reject'];
+    $sql = "UPDATE `registration` SET status='rejected' WHERE reg_no='$reg_no'";
+    $result = mysqli_query($con, $sql);
+    if ($result) {
+        header('location:admin.php');
+    } else {
+        echo "Error: " . mysqli_error($con);
+    }
+}
+
+// Verify admin session
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('location:adminlogin.php');
+    exit();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -181,74 +227,39 @@
 <!--  Header area end -->
 
 <br>
-<!-- Membership Request -->
-<div class="row">
-	<div class="col-xl-4 col-md-12"style="width:100%">
-		<!-- Portlet card -->
-		<div class="card">
-			<div class="card-body">
-				<div class="card-widgets">
-					<a href="javascript: void(0);" data-bs-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-					<a data-bs-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
-					<a href="javascript: void(0);" data-bs-toggle="remove"><i class="mdi mdi-close"></i></a>
-				</div>
-				<h4 class="header-title mb-0">Member Requests:</h4><br><br>
-				<div id="memberRequests" class="row">
-					<div class="col-lg-4 col-xl-4">
-						<div class="card text-center">
-							<div class="card-body">
-								<img src="assets/images/users/user-1.jpg" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
-
-								<h4 class="mb-0">Nayza Thasneem</h4>
-								<p class="text-muted">LBT19CS124</p>
-
-								<button type="button" class="btn btn-success btn-xs waves-effect mb-2 waves-light" fdprocessedid="dymkp">ACCEPT</button>
-								<button type="button" class="btn btn-danger btn-xs waves-effect mb-2 waves-light" fdprocessedid="04t7y2">REJECT</button>
-							</div>
-						</div> <!-- end card -->
-					</div>
-				
-					<div class="col-lg-4 col-xl-4">
-						<div class="card text-center">
-							<div class="card-body">
-								<img src="assets/images/users/user-1.jpg" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
-
-								<h4 class="mb-0">Revathy P</h4>
-								<p class="text-muted">LBT19CS145</p>
-
-								<button type="button" class="btn btn-success btn-xs waves-effect mb-2 waves-light" fdprocessedid="dymkp">ACCEPT</button>
-								<button type="button" class="btn btn-danger btn-xs waves-effect mb-2 waves-light" fdprocessedid="04t7y2">REJECT</button>
-							</div>
-						</div> <!-- end card -->
-					</div>
-				</div>
-				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-				<script>
-					// Function to add a new member request dynamically
-					function addMemberRequest(name, id) {
-						var requestHtml = `
-						<div class="col-lg-4 col-xl-4">
-							<div class="card text-center">
-								<div class="card-body">
-									<img src="assets/images/users/user-1.jpg" class="rounded-circle avatar-lg img-thumbnail" alt="profile-image">
-									<h4 class="mb-0">${name}</h4>
-									<p class="text-muted">${id}</p>
-									<button type="button" class="btn btn-success btn-xs waves-effect mb-2 waves-light" fdprocessedid="dymkp">ACCEPT</button>
-									<button type="button" class="btn btn-danger btn-xs waves-effect mb-2 waves-light" fdprocessedid="04t7y2">REJECT</button>
-								</div>
-							</div> <!-- end card -->
-						</div>`;
-						
-						$('#memberRequests').append(requestHtml);
-					}
-				</script>
-			</div> <!-- end card-body -->
-		</div> <!-- end card-->
-	</div> <!-- end col-->
-</div>
-<!-- Membership Request End -->
+ <!-- Membership Request -->
+ <div class="row">
+        <div class="col-xl-4 col-md-12">
+            <!-- Portlet card -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-widgets">
+                        <!-- Card widgets here -->
+                    </div>
+                    <h4 class="header-title mb-0">Member Requests:</h4><br><br>
+                    <div id="memberRequests" class="row">
+                        <?php
+                        $requests = fetchPendingRequests($con);
+                        foreach ($requests as $request) {
+                            echo "<div class='col-lg-4 col-xl-4'>";
+                            echo "<div class='card text-center'>";
+                            echo "<div class='card-body'>";
+                            echo "<img src='assets/images/users/user-1.jpg' class='rounded-circle avatar-lg img-thumbnail' alt='profile-image'>";
+                            echo "<h4 class='mb-0'>" . $request['name'] . "</h4>";
+                            echo "<p class='text-muted'>" . $request['reg_no'] . "</p>";
+                            echo "<a href='admin.php?approve=" . $request['reg_no'] . "' class='btn btn-success btn-xs waves-effect mb-2 waves-light'>ACCEPT</a>";
+                            echo "<a href='admin.php?reject=" . $request['reg_no'] . "' class='btn btn-danger btn-xs waves-effect mb-2 waves-light'>REJECT</a>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Membership Request End -->
 
 <br>
 <!-- Announcements-->

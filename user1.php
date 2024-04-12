@@ -1,24 +1,37 @@
 <?php
 session_start();
 
-// Check if user is signed in
-if (!isset($_SESSION['user_details'])) {
-    // Redirect to sign-in page if not signed in
-    header("Location: signin.php");
+// Check if the user is logged in and their details are stored in the session
+if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && isset($_SESSION['reg_no'])) {
+    // Fetch user details from the session
+    $reg_no = $_SESSION['reg_no'];
+
+    // Fetch user details from the database using $reg_no
+    include 'connect.php';
+
+    $sql = "SELECT * FROM `registration` WHERE reg_no='$reg_no'";
+    $result = mysqli_query($con, $sql);
+
+    if(mysqli_num_rows($result) == 1) {
+        $user_details = mysqli_fetch_assoc($result);
+        // Now $user_details contains all the user details, you can access them as needed
+        $name = $user_details['name'];
+        $reg_no = $user_details['reg_no'];
+        $department = $user_details['department'];
+        $graduation_year = $user_details['year_of_passout'];
+        $current_position = $user_details['designation'];
+        $email = $user_details['email'];
+    } else {
+        // User not found in the database, handle this case accordingly
+        echo "User not found in the database.";
+    }
+} else {
+    // Redirect back to the sign-in page if the user is not logged in
+    header('location:signin.php');
     exit();
 }
-
-// Fetch user details from session
-$user_details = $_SESSION['user_details'];
-
-// Extract relevant information from user details
-$name = $user_details['name'];
-$reg_no = $user_details['reg_no'];
-$department = $user_details['department'];
-$graduation_year = $user_details['year_of_passout'];
-$current_position = $user_details['designation'];
-$email = $user_details['email'];
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -216,7 +229,7 @@ $email = $user_details['email'];
     	<div class="row align-items-center">
          	<div class="col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
             	<div class="breadcrumb-content">
-				<h1>Welcome <?php echo $name; ?>!!!</h1>
+				<h1>Welcome <?php echo isset($name) ? $name : ''; ?>!!!</h1>
             	</div>
         	</div>
 			
@@ -245,22 +258,22 @@ $email = $user_details['email'];
 			</div>
 			<div class="card-body pt-0">
 			  <table class="table">
-				<tr>
-				  <th width="30%">Register no </th>
-				  <td><?php echo $reg_no; ?></td>
-				</tr>
-				<tr>
-				  <th width="30%">Department</th>
-				  <td><?php echo $department; ?></td>
-				</tr>
-				<tr>
-				  <th width="30%">Year of Graduation</th>
-				  <td><?php echo $graduation_year; ?></td>
-				</tr>
-				<tr>
-				  <th width="30%">Current Position</th>
-				  <td><?php echo $current_position; ?></td>
-				</tr>
+			  <tr>
+            <th width="30%">Register no</th>
+            <td><?php echo isset($reg_no) ? $reg_no : ''; ?></td>
+        </tr>
+        <tr>
+            <th width="30%">Department</th>
+            <td><?php echo isset($department) ? $department : ''; ?></td>
+        </tr>
+        <tr>
+            <th width="30%">Year of Graduation</th>
+            <td><?php echo isset($graduation_year) ? $graduation_year : ''; ?></td>
+        </tr>
+        <tr>
+            <th width="30%">Current Position</th>
+            <td><?php echo isset($current_position) ? $current_position : ''; ?></td>
+        </tr>
 				
 			  </table>
 			</div>
