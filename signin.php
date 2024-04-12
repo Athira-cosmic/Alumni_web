@@ -1,27 +1,32 @@
 <?php
 session_start();
-if($_SERVER['REQUEST_METHOD']=='POST'){
-	include 'connect.php';
-	$reg_no=$_POST['reg_no'];
-	$password=$_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    include 'connect.php';
+    $reg_no = $_POST['reg_no'];
+    $password = $_POST['password'];
 
-	$sql="Select * from `registration` where
-	reg_no='$reg_no' and password='$password'";
+    $sql = "SELECT * FROM `registration` WHERE reg_no='$reg_no' AND password='$password'";
+    $result = mysqli_query($con, $sql);
+    if ($result) {
+        $num = mysqli_num_rows($result);
+        if ($num > 0) {
+            // Fetch user details
+            $user_details = mysqli_fetch_assoc($result);
 
-	$result=mysqli_query($con,$sql);
-	if($result){
-		$num=mysqli_num_rows($result);
-		if($num>0){
-			$_SESSION['reg_no']=$reg_no;
-			header("Location:user1.php");
-			exit();
-		}else{
-			echo "Invalid data";
-			exit();
-		}
-	}
+            // Store user details in session
+            $_SESSION['user_details'] = $user_details;
+
+            // Redirect to user profile page
+            header("Location: user1.php");
+            exit();
+        } else {
+            echo "Invalid data";
+            exit();
+        }
+    }
 }
 ?>
+
 
 <!doctype html>
 <html lang="en">

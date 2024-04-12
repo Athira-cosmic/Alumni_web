@@ -1,3 +1,25 @@
+<?php
+session_start();
+
+// Check if user is signed in
+if (!isset($_SESSION['user_details'])) {
+    // Redirect to sign-in page if not signed in
+    header("Location: signin.php");
+    exit();
+}
+
+// Fetch user details from session
+$user_details = $_SESSION['user_details'];
+
+// Extract relevant information from user details
+$name = $user_details['name'];
+$reg_no = $user_details['reg_no'];
+$department = $user_details['department'];
+$graduation_year = $user_details['year_of_passout'];
+$current_position = $user_details['designation'];
+$email = $user_details['email'];
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -194,7 +216,7 @@
     	<div class="row align-items-center">
          	<div class="col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
             	<div class="breadcrumb-content">
-               		<h1>Welcome Nayza!!!</h1>
+				<h1>Welcome <?php echo $name; ?>!!!</h1>
             	</div>
         	</div>
 			
@@ -212,7 +234,7 @@
 		  <div class="card shadow-sm">
 			<div class="card-header bg-transparent text-center">
 			  <img class="profile_img" src="assets/images/users/user-1.jpg" alt="student dp">
-			  <h3>Nayza</h3>
+			  <h3><?php echo $name; ?></h3>
 			</div>
 		  </div>
 		</div>
@@ -225,19 +247,19 @@
 			  <table class="table">
 				<tr>
 				  <th width="30%">Register no </th>
-				  <td>LBT19CS123</td>
+				  <td><?php echo $reg_no; ?></td>
 				</tr>
 				<tr>
 				  <th width="30%">Department</th>
-				  <td>Computer Science</td>
+				  <td><?php echo $department; ?></td>
 				</tr>
 				<tr>
 				  <th width="30%">Year of Graduation</th>
-				  <td>2023</td>
+				  <td><?php echo $graduation_year; ?></td>
 				</tr>
 				<tr>
 				  <th width="30%">Current Position</th>
-				  <td>Senior Software Engineer at Target</td>
+				  <td><?php echo $current_position; ?></td>
 				</tr>
 				
 			  </table>
@@ -249,8 +271,7 @@
 			  <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
 			</div>
 			<div class="card-body pt-0">
-				<p>Email: emily.nayza@example.com<br>
-					LinkedIn: linkedin.com/in/nayza</p>
+				<p>Email: <?php echo $email; ?><br>
 			</div>
 		  </div>
 		</div>
