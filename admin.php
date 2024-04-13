@@ -79,7 +79,8 @@ if (!isset($_SESSION['admin_logged_in'])) {
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
     <style>
-    .card {
+    /* Card Styles */
+	.card {
         background-color: 1px solid #19075f;
         border-radius: 15px;
         box-shadow: 0 2px 30px rgba(9, 2, 82, 0.637);
@@ -97,6 +98,8 @@ if (!isset($_SESSION['admin_logged_in'])) {
         text-decoration: none;
         margin-right: 10px;
     }
+	
+	/* 	General Styles */
 
     .header-title {
         color: #333;
@@ -129,8 +132,6 @@ if (!isset($_SESSION['admin_logged_in'])) {
 		width: 10%;
 	}
 </style>
-	
-
 </head>
 <body>
 
@@ -229,7 +230,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 <br>
  <!-- Membership Request -->
  <div class="row">
-        <div class="col-xl-4 col-md-12">
+        <div class="col-xl-12 col-md-12">
             <!-- Portlet card -->
             <div class="card">
                 <div class="card-body">
