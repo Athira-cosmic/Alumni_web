@@ -183,7 +183,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 						</div>
 						<ul>
 							<li>
-								<a href="admin.html" class="active">Admin Dashboard</a>
+								<a href="admin_dashboard.php" class="active">Update Notification</a>
 							</li>
 							
 							<li>
@@ -274,12 +274,13 @@ if (!isset($_SESSION['admin_logged_in'])) {
 					<a href="javascript: void(0);" data-bs-toggle="remove"><i class="mdi mdi-close"></i></a>
 				</div>
 				<h4 class="header-title mb-0">Announcements:</h4><br><br>
+				<form action="create_announcement.php" method="POST" enctype="multipart/form-data">
 				<div class="mb-3">
 					<label for="validationCustom01" class="form-label">Title</label>
-					<input type="text" class="form-control" id="validationCustom01" placeholder="Events"  required />
+					<input type="text" name="title" class="form-control" id="validationCustom01" placeholder="Events"  required />
 				</div>
 				<label>Image</label>
-				<input type="file"><br><br>
+				<input type="file" name="image"><br><br>
 				<div class="col-xl-6 col-lg-12 order-lg-2 order-xl-1" style="width: 100%;">
 					<!-- new post -->
 					<div class="card">
@@ -316,6 +317,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 						</div>
 					</div>
 					<!-- end new post -->
+				</form>
 			</div> <!-- end card-body -->
 		</div> <!-- end card-->
 	</div> <!-- end col -->

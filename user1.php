@@ -300,10 +300,30 @@ if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && 
 <br>
 <br>
 <div id="notifications-container">
-	<div class="notification">
-        <h3>Welcome to the Dashboard!</h3>
-        <p>There are no new announcements at the moment. Check back later!</p>
-		<img src="assets/images/cart-cta.png" alt="announcements">
+        <!-- PHP code to display announcements -->
+        <?php
+        // Fetch announcements from the database
+        $sql_announcements = "SELECT * FROM announcements ORDER BY id DESC";
+        $result_announcements = mysqli_query($con, $sql_announcements);
+
+        // Check if there are any announcements
+        if(mysqli_num_rows($result_announcements) > 0) {
+            // Loop through each announcement and display it
+            while($announcement = mysqli_fetch_assoc($result_announcements)) {
+                echo '<div class="notification">';
+                echo '<h3>' . $announcement['title'] . '</h3>';
+                echo '<p>' . $announcement['content'] . '</p>';
+                echo '<img src="' . $announcement['image'] . '" alt="Announcement Image">';
+                echo '</div>';
+            }
+        } else {
+            // If there are no announcements
+            echo '<div class="notification">';
+            echo '<h3>Welcome to the Dashboard!</h3>';
+            echo '<p>There are no new announcements at the moment. Check back later!</p>';
+            echo '</div>';
+        }
+        ?>
     </div>
 </div>
 <script>
