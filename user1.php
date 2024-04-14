@@ -94,10 +94,11 @@ if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && 
             margin-bottom: 0;
         }
         .notification img {
-            max-width: 100%;
-            height: auto;
+            width: auto;
+            height: 180px;
             display: block;
             margin-top: 10px;
+			object-fit:cover;
         }
 		.modal-bg {
 			display: none;

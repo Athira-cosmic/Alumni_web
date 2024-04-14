@@ -265,71 +265,66 @@ if (!isset($_SESSION['admin_logged_in'])) {
 <br>
 <!-- Announcements-->
 <div class="row" id="notify">
-	<div class="col-xl-6" style="width:100%">
-		<div class="card">
-			<div class="card-body">
-				<div class="card-widgets">
-					<a href="javascript: void(0);" data-bs-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-					<a data-bs-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>
-					<a href="javascript: void(0);" data-bs-toggle="remove"><i class="mdi mdi-close"></i></a>
-				</div>
-				<h4 class="header-title mb-0">Announcements:</h4><br><br>
-				<form action="create_announcement.php" method="POST" enctype="multipart/form-data">
-				<div class="mb-3">
-					<label for="validationCustom01" class="form-label">Title</label>
-					<input type="text" name="title" class="form-control" id="validationCustom01" placeholder="Events"  required />
-				</div>
-				<label>Image</label>
-				<input type="file" name="image"><br><br>
-				<div class="col-xl-6 col-lg-12 order-lg-2 order-xl-1" style="width: 100%;">
-					<!-- new post -->
-					<div class="card">
-						<div class="card-body p-0">
-							<ul class="nav nav-tabs nav-bordered">
-								<li class="nav-item">
-									<a href="#newpost" data-bs-toggle="tab" aria-expanded="false" class="nav-link active px-3 py-2">
-										<i class="mdi mdi-pencil-box-multiple font-18 d-md-none d-block"></i>
-										<span class="d-none d-md-block">Create Post</span>
-									</a>
-								</li>
-								
-								
-							</ul> <!-- end nav-->
-							<div class="tab-content pt-0">
-								<div class="tab-pane show active p-3" id="newpost">
-									<!-- comment box -->
-									<div class="border rounded">
-										<form action="#" class="comment-area-box">
-											<textarea rows="4" class="form-control border-0 resize-none" placeholder="Write something...."></textarea>
-											<div class="p-2 bg-light d-flex justify-content-between align-items-center">
-												<div>
-													<a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-image-outline"></i></a>
-													<a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-crosshairs-gps"></i></a>
-													<a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-attachment"></i></a>
-												</div>
-												<button type="submit" class="btn btn-sm btn-success"><i class='mdi mdi-send-outline me-1'></i>Post</button>
-											</div>
-										</form>
-									</div> <!-- end .border-->
-									<!-- end comment box -->
-								</div> <!-- end preview-->
-							</div> <!-- end tab-content-->
-						</div>
-					</div>
-					<!-- end new post -->
-				</form>
-			</div> <!-- end card-body -->
-		</div> <!-- end card-->
-	</div> <!-- end col -->
-
-   
+    <div class="col-xl-6" style="width:100%">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-widgets">
+                    <a href="javascript: void(0);" data-bs-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                    <a data-bs-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>
+                    <a href="javascript: void(0);" data-bs-toggle="remove"><i class="mdi mdi-close"></i></a>
+                </div>
+                <h4 class="header-title mb-0">Announcements:</h4><br><br>
+                <form action="create_announcement.php" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="validationCustom01" class="form-label">Title</label>
+                        <input type="text" name="title" class="form-control" id="validationCustom01" placeholder="Events" required />
+                    </div>
+                    <label>Image</label>
+                    <input type="file" name="image"><br><br>
+                    <div class="col-xl-6 col-lg-12 order-lg-2 order-xl-1" style="width: 100%;">
+                        <!-- new post -->
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <ul class="nav nav-tabs nav-bordered">
+                                    <li class="nav-item">
+                                        <a href="#newpost" data-bs-toggle="tab" aria-expanded="false" class="nav-link active px-3 py-2">
+                                            <i class="mdi mdi-pencil-box-multiple font-18 d-md-none d-block"></i>
+                                            <span class="d-none d-md-block">Create Post</span>
+                                        </a>
+                                    </li>
+                                </ul> <!-- end nav-->
+                                <div class="tab-content pt-0">
+                                    <div class="tab-pane show active p-3" id="newpost">
+                                        <!-- comment box -->
+                                        <div class="border rounded">
+                                            <!-- Input field for writing something -->
+                                            <div class="mb-3">
+                                                <input type="text" class="form-control" id="writeSomething" name="write_something" placeholder="Write something...">
+                                            </div>
+                                            <!-- End input field -->
+                                            <div class="p-2 bg-light d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-image-outline"></i></a>
+                                                    <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-crosshairs-gps"></i></a>
+                                                    <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-attachment"></i></a>
+                                                </div>
+                                                <button type="submit" class="btn btn-sm btn-success"><i class='mdi mdi-send-outline me-1'></i>Post</button>
+                                            </div>
+                                        </div> <!-- end .border-->
+                                        <!-- end comment box -->
+                                    </div> <!-- end preview-->
+                                </div> <!-- end tab-content-->
+                            </div>
+                        </div>
+                        <!-- end new post -->
+                    </div>
+                </form>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col -->
 </div>
 <!-- end row -->
-
-    
-</div>
 <!-- Annoucement ends -->
-
 <!-- Footer Area Start -->
 
 <div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-color: #F6F6F6;">
