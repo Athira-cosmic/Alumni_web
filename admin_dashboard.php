@@ -173,10 +173,10 @@
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo "<div class='announcement'>";
                                 echo "<h5>" . $row['title'] . "</h5>";
-                                echo "<img src='" . $row['image'] . "' alt='Announcement Image'>";
+                                echo "<img src='" . $row['image'] . "' alt='Announcement Image' style='margin: 2px;'>";
                                 echo "<div>";
-                                echo "<a href='edit_announcement.php?id=" . $row['id'] . "'>Edit</a>";
-                                echo "<a href='delete_announcement.php?id=" . $row['id'] . "'>Delete</a>";
+                                echo "<a href='edit_announcement.php?id=" . $row['id'] . "'class='btn btn-primary me-2'>Edit</a>";
+                                echo "<a href='delete_announcement.php?id=" . $row['id'] . "'class='btn btn-danger'>Delete</a>";
                                 echo "</div>";
                                 echo "</div>";
                             }
