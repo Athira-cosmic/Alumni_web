@@ -162,6 +162,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">Announcements</h4>
+						<div id="notifications-container">
                         <!-- Display announcements fetched from database -->
                         <?php
                         // PHP logic to fetch announcements from database and display them
@@ -184,6 +185,7 @@
                             echo "No announcements found.";
                         }
                         ?>
+					</div>
                     </div>
                 </div>
             </div>
