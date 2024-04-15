@@ -148,14 +148,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 <!-- Menu end -->
 <?php
 	if(mysqli_num_rows($result) != 1){
-'<div class="container mt-5">
+echo '<div class="container mt-5">
   			<div class="alert alert-info alert-dismissible fade show" role="alert">
 			  Invalid credentials or user not approved by admin
     		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
       		<span aria-hidden="true">&times;</span>
     		</button>
   			</div>
-</div>'
+</div>';
 	}
 ?>
 
