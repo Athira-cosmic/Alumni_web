@@ -16,6 +16,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $_SESSION['reg_no'] = $reg_no; // Store reg_no in session for later use
         header('location:user1.php');
     }else{
+		echo "Invalid credentials or user not approved by admin";
     }
 }
 ?>
@@ -146,18 +147,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	</div>
 </nav>
 <!-- Menu end -->
-<?php
-	if(mysqli_num_rows($result) != 1){
-echo '<div class="container mt-5">
-  			<div class="alert alert-info alert-dismissible fade show" role="alert">
-			  Invalid credentials or user not approved by admin
-    		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      		<span aria-hidden="true">&times;</span>
-    		</button>
-  			</div>
-</div>';
-	}
-?>
 
 
 <!-- Breadcrumb Start -->
