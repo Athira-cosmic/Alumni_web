@@ -1,12 +1,5 @@
 <?php
-session_start();
 include 'connect.php';
-
-// Verify admin session
-if (!isset($_SESSION['admin_logged_in'])) {
-    header('location:adminlogin.php');
-    exit();
-}
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -28,8 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Insert the image path into the database along with title and content
                 $sql = "INSERT INTO announcements (title, content, image) VALUES ('$title', '$content', '$image_path')";
                 if (mysqli_query($con, $sql)) {
-                    echo "<div id='success_message'>Announcement created successfully.</div>";
-                   } else {
+                    echo "Announcement created successfully.";
+                } else {
                     echo "Error: " . mysqli_error($con);
                 }
             } else {

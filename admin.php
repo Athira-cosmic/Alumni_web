@@ -274,7 +274,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
                     <a href="javascript: void(0);" data-bs-toggle="remove"><i class="mdi mdi-close"></i></a>
                 </div>
                 <h4 class="header-title mb-0">Announcements:</h4><br><br>
-                <form action="create_announcement.php" method="POST" enctype="multipart/form-data">
+                <form action="create_announcement.php" id="announcementForm" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="validationCustom01" class="form-label">Title</label>
                         <input type="text" name="title" class="form-control" id="validationCustom01" placeholder="Events" required />
@@ -319,6 +319,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
                         <!-- end new post -->
                     </div>
                 </form>
+                <div id="success_message"></div>
             </div> <!-- end card-body -->
         </div> <!-- end card-->
     </div> <!-- end col -->
@@ -398,6 +399,37 @@ if (!isset($_SESSION['admin_logged_in'])) {
 <script src="assets/js/viewport.jquery.js"></script>
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#announcementForm').submit(function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Create a FormData object
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: 'create_announcement.php',
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    $('#success_message').html(response); // Display the success message
+                    setTimeout(function() {
+                        $('#success_message').fadeOut(); // Fade out the success message after 2 seconds
+                    }, 2000);
+                    $('#announcementForm')[0].reset(); // Reset the form
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
 
 </body>
 
