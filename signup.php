@@ -8,7 +8,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $email=$_POST['email'];
     $password=$_POST['password'];
     $ph_no=$_POST['ph_no'];
-    $address=$_POST['address'];
+    $address_line1=$_POST['address_line1'];
+	$address_line2=$_POST['address_line2'];
+	$city=$_POST['city'];
+	$state=$_POST['state'];
+	$postal_code=$_POST['postal_code'];
+	$country=$_POST['country'];
     $year_of_passout=$_POST['year_of_passout'];
     $course=$_POST['course'];
     $department=$_POST['department'];
@@ -19,8 +24,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $status = 'pending';
 
     // Insert user data into the database
-    $sql="INSERT INTO `registration` (reg_no, name, email, password, ph_no, address, year_of_passout, course, department, company, designation, status)
-          VALUES ('$reg_no', '$name', '$email', '$password', '$ph_no', '$address', '$year_of_passout', '$course', '$department', '$company', '$designation', '$status')";
+    $sql="INSERT INTO `registration` (reg_no, name, email, password, ph_no, address_line1, address_line2, city, state, postal_code, country, year_of_passout, course, department, company, designation, status)
+          VALUES ('$reg_no', '$name', '$email', '$password', '$ph_no', '$address_line1', '$address_line2','$city', '$state', '$postal_code', '$country',  '$year_of_passout', '$course', '$department', '$company', '$designation', '$status')";
 
     $result=mysqli_query($con,$sql);
     
@@ -226,9 +231,23 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 <input type="text" name="ph_no"  placeholder="Contact">
                 <br>
                 <br>
-                <label>Address</label><br>
-                <textarea rows="5" cols="80" name="address" placeholder="Address">
-                </textarea><br><br>
+                <label>Address Line 1</label><br>
+                <input name="address_line1" placeholder="Address Line 1">
+                <br><br>
+				<label>Address Line 2</label><br>
+				<input name="address_line2" placeholder="Address Line 2">
+				<br><br>
+				<label>City</label><br>
+				<input name="city" placeholder="City">
+				<br><br>
+				<label>State</label><br>
+				<input name="state" placeholder="State">
+				<br><br>
+				<label>Country</label><br>
+				<input name="country" placeholder="Country">
+				<br><br>
+				<label>Pincode</label><br>
+				<input name="postal_code" placeholder="Pincode">
                 <label>Year of Passout</label>
                 <input  type="year" name=year_of_passout placeholder="Year"><br><br>
                 <label>Course</label>
@@ -241,10 +260,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 <label>Department</label>
                 <select name="department">
                     <option>Select</option>
-                    <option>CS</option>
+                    <option>CSE</option>
                     <option>IT</option>
-                    <option>EC</option>
-                    <option>AEI</option>
+                    <option>ECE</option>
+					<option>ERE</option>
+                    <option>AE&I</option>
                     <option>Civil</option>
                 </select>
                 <br>
