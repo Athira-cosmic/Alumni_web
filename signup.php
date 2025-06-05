@@ -25,7 +25,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $status = 'pending';
 
     // Insert user data into the database
+<<<<<<< HEAD
     $sql="INSERT INTO `registration` (reg_no, name, email, linkedin,  password, ph_no, address_line1, address_line2, city, state, postal_code, country, year_of_passout, course, department, company, designation, status)
+=======
+    $sql="INSERT INTO `registration` (reg_no, name, email, linkedin, password, ph_no, address_line1, address_line2, city, state, postal_code, country, year_of_passout, course, department, company, designation, status)
+>>>>>>> fb226540f086531c2d37fc46f1f0e3f2f5165c0a
           VALUES ('$reg_no', '$name', '$email', '$linkedin', '$password', '$ph_no', '$address_line1', '$address_line2','$city', '$state', '$postal_code', '$country',  '$year_of_passout', '$course', '$department', '$company', '$designation', '$status')";
 
     $result=mysqli_query($con,$sql);
@@ -224,10 +228,17 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 <input type="email"  id="email"name="email" placeholder="Email">
                 <br>
 				<br>
+<<<<<<< HEAD
                 <label>LinkedIn</label>
                 <input type="text"  id="linkedin"name="linkedin" placeholder="Linkedin">
                 <br>
                 <br>
+=======
+				<label>LinkedIn</label>
+                <input type="text"  id="linkedin"name="linkedin" placeholder="LinkedIn">
+				<br>
+				<br>
+>>>>>>> fb226540f086531c2d37fc46f1f0e3f2f5165c0a
                 <label>Password</label>
                 <input type="password"  id="password"name="password" placeholder="Password" >
                 <br>
