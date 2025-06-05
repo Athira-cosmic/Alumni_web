@@ -1,6 +1,6 @@
 <?php
 include 'connect.php'
-echo "<!doctype html>
+echo <!doctype html>
 <html lang='en'>
 <!-- Mirrored from themeforest.wprealizer.com/html-educoda-preview/educoda/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Apr 2023 05:52:46 GMT -->
 	<head>
@@ -517,6 +517,6 @@ echo "<!doctype html>
 		<!-- Main JS -->
 		<script src='assets/js/main.js'></script>
 	</body>
-</html>";
+</html>;
 $conn->close();
 ?>

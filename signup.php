@@ -6,6 +6,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $reg_no=$_POST['reg_no'];
     $name=$_POST['name'];
     $email=$_POST['email'];
+	$linkedin=$_POST['linkedin'];
     $password=$_POST['password'];
     $ph_no=$_POST['ph_no'];
     $address_line1=$_POST['address_line1'];
@@ -24,8 +25,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $status = 'pending';
 
     // Insert user data into the database
-    $sql="INSERT INTO `registration` (reg_no, name, email, password, ph_no, address_line1, address_line2, city, state, postal_code, country, year_of_passout, course, department, company, designation, status)
-          VALUES ('$reg_no', '$name', '$email', '$password', '$ph_no', '$address_line1', '$address_line2','$city', '$state', '$postal_code', '$country',  '$year_of_passout', '$course', '$department', '$company', '$designation', '$status')";
+    $sql="INSERT INTO `registration` (reg_no, name, email, linkedin, password, ph_no, address_line1, address_line2, city, state, postal_code, country, year_of_passout, course, department, company, designation, status)
+          VALUES ('$reg_no', '$name', '$email', '$linkedin', '$password', '$ph_no', '$address_line1', '$address_line2','$city', '$state', '$postal_code', '$country',  '$year_of_passout', '$course', '$department', '$company', '$designation', '$status')";
 
     $result=mysqli_query($con,$sql);
     
@@ -222,7 +223,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 <label>E-Mail</label>
                 <input type="email"  id="email"name="email" placeholder="Email">
                 <br>
-                <br>
+				<br>
+				<label>LinkedIn</label>
+                <input type="text"  id="linkedin"name="linkedin" placeholder="LinkedIn">
+				<br>
+				<br>
                 <label>Password</label>
                 <input type="password"  id="password"name="password" placeholder="Password" >
                 <br>
