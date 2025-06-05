@@ -1,6 +1,4 @@
-<?php
-include 'connect.php'
-echo "<!doctype html>
+<!doctype html>
 <html lang='en'>
 <!-- Mirrored from themeforest.wprealizer.com/html-educoda-preview/educoda/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Apr 2023 05:52:46 GMT -->
 	<head>

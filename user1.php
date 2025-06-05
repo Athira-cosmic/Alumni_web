@@ -21,6 +21,7 @@ if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && 
         $graduation_year = $user_details['year_of_passout'];
         $current_position = $user_details['designation'];
         $email = $user_details['email'];
+		$linkedin = $user_details['linkedin'];
     } else {
         // User not found in the database, handle this case accordingly
         echo "User not found in the database.";
@@ -285,7 +286,10 @@ if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && 
 			  <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
 			</div>
 			<div class="card-body pt-0">
-				<p>Email: <?php echo $email; ?><br>
+			<p>Email: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a><br></p>
+			</div>
+			<div class="card-body pt-0">
+			<p>LinkedIn: <a href="<?php echo $linkedin; ?>" target="_blank"><?php echo $linkedin; ?></a><br></p>
 			</div>
 		  </div>
 		</div>
