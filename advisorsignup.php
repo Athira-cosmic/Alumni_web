@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $status = 'pending';
 
-    $sql = "INSERT INTO registration 
+    $sql = "INSERT INTO staff_advisors 
         (name, email, password, status)
         VALUES 
         ('$name', '$email', '$password', '$status')";

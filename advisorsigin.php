@@ -4,16 +4,16 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     include 'connect.php';
 
     // Fetch form data
-    $reg_no=$_POST['reg_no'];
+    $reg_no=$_POST['email'];
     $password=$_POST['password'];
 
     // Verify user credentials
-    $sql="SELECT * FROM `registration` WHERE reg_no='$reg_no' AND password='$password' AND status='approved'";
+    $sql="SELECT * FROM `staff_advisors` WHERE email='$email' AND password='$password' AND status='approved'";
     $result=mysqli_query($con,$sql);
     
     if(mysqli_num_rows($result) == 1){
         $_SESSION['user_logged_in'] = true;
-        $_SESSION['reg_no'] = $reg_no; // Store reg_no in session for later use
+        $_SESSION['email'] = $reg_no; // Store reg_no in session for later use
         header('location:user1.php');
     }else{
 		echo '<div id="popup-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
@@ -200,11 +200,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                
                
             </div>
-            <form action="signin.php" method="post" class="contact-input mt-5 position-relative">
+            <form action="advisorsignin.php" method="post" class="contact-input mt-5 position-relative">
                <div class="row">
                  
                   <div class="col-xl-12 col-lg-12 col-sm-12 col-12">
-                     <input type="text" name="reg_no" placeholder="Register no.">
+                     <input type="email" name="email" placeholder="Email id">
                   </div>
                   <div class="col-xl-12 col-lg-12 col-sm-12 col-12">
                      <input type="password" name="password" placeholder="Password">
