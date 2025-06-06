@@ -3,34 +3,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include 'connect.php';
 
     // Fetch and sanitize all fields
-    $reg_no = mysqli_real_escape_string($con, $_POST['reg_no']);
     $name = mysqli_real_escape_string($con, $_POST['name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
-    $linkedin = mysqli_real_escape_string($con, $_POST['linkedin']);
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $ph_no = mysqli_real_escape_string($con, $_POST['ph_no']);
-    $address_line1 = mysqli_real_escape_string($con, $_POST['address_line1']);
-    $address_line2 = mysqli_real_escape_string($con, $_POST['address_line2']);
-    $city = mysqli_real_escape_string($con, $_POST['city']);
-    $state = mysqli_real_escape_string($con, $_POST['state']);
-    $postal_code = mysqli_real_escape_string($con, $_POST['postal_code']);
-    $country = mysqli_real_escape_string($con, $_POST['country']);
-    $year_of_passout = mysqli_real_escape_string($con, $_POST['year_of_passout']);
-    $course = mysqli_real_escape_string($con, $_POST['course']);
-    $department = mysqli_real_escape_string($con, $_POST['department']);
-	$staff_advisor = mysqli_real_escape_string($con, $_POST['staff_advisor']);
-    $company = mysqli_real_escape_string($con, $_POST['company']);
-    $designation = mysqli_real_escape_string($con, $_POST['designation']);
-
     $status = 'pending';
 
     $sql = "INSERT INTO registration 
-        (reg_no, name, email, linkedin, password, ph_no, address_line1, address_line2, city, state, postal_code, country, year_of_passout, course, department, staff_advisor, company, designation, status)
+        (name, email, password, status)
         VALUES 
-        ('$reg_no', '$name', '$email', '$linkedin', '$password', '$ph_no', '$address_line1', '$address_line2', '$city', '$state', '$postal_code', '$country', '$year_of_passout', '$course', '$department', '$staff_advisor', '$company', '$designation', '$status')";
+        ('$name', '$email', '$password', '$status')";
 
     if (mysqli_query($con, $sql)) {
-        header('Location: signin.php');
+        header('Location: advisorsignin.php');
         exit();
     } else {
         echo "Error: " . mysqli_error($con);
@@ -240,102 +224,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   				<!-- Step 1 -->
   				<div class="form-step active">
-    				<h3>Basic Info</h3>
-    				<label>Registration Number</label>
-    				<input type="text" name="reg_no" placeholder="Register no" required>
-    				<br><br>
     				<label>Name</label>
     				<input type="text" name="name" placeholder="Name" required>
     				<br><br>
     				<label>E-Mail</label>
     				<input type="email" name="email" placeholder="Email" required>
     				<br><br>
-    				<label>LinkedIn</label>
-    				<input type="text" name="linkedin" placeholder="Linkedin">
-    				<br><br>
-    				<button type="button" class="next-btn">Next</button>
-  				</div>
-
-  				<!-- Step 2 -->
-  				<div class="form-step">
-    				<h3>Security & Contact</h3>
     				<label>Password</label>
     				<input type="password" name="password" placeholder="Password" required>
     				<br><br>
-    				<label>Contact</label>
-    				<input type="tel" name="ph_no" placeholder="Contact" pattern="[0-9]{10}" required>
-    				<br><br>
-    				<button type="button" class="prev-btn">Previous</button>
-    				<button type="button" class="next-btn">Next</button>
-  				</div>
-
-  				<!-- Step 3 -->
-  				<div class="form-step">
-    				<h3>Address</h3>
-   		 			<label>Address Line 1</label><br>
-    				<input name="address_line1" placeholder="Address Line 1" required>
-    				<br><br>
-    				<label>Address Line 2</label><br>
-    				<input name="address_line2" placeholder="Address Line 2">
-    				<br><br>
-    				<label>City</label><br>
-    				<input name="city" placeholder="City" required>
-    				<br><br>
-    				<label>State</label><br>
-    				<input name="state" placeholder="State" required>
-    				<br><br>
-    				<label>Country</label><br>
-    				<input name="country" placeholder="Country" required>
-    				<br><br>
-    				<label>Pincode</label><br>
-    				<input name="postal_code" placeholder="Pincode" required>
-    				<br><br>
-    				<button type="button" class="prev-btn">Previous</button>
-    				<button type="button" class="next-btn">Next</button>
-  				</div>
-
-  				<!-- Step 4 -->
-  				<div class="form-step">
-    				<h3>Education & Work</h3>
-    				<label>Year of Passout</label>
-    				<select name="year_of_passout" required>
-    					<option value="">Select Year</option>
-    					<?php
-        					$currentYear = date("Y");
-        					for ($year = 2004; $year <= $currentYear; $year++) {
-            				echo "<option value='$year'>$year</option>";
-        					}
-    					?>
-					</select>
-    				<label>Course</label>
-    				<select name="course" required>
-      					<option value="">Select</option>
-      					<option value="BTech">BTech</option>
-      					<option value="MTech">MTech</option>
-      					<option value="PhD">PhD</option>
-    				</select>
-    				<br><br>
-    				<label>Department</label>
-    				<select name="department" required>
-      					<option value="">Select</option>
-      					<option value="CSE">CSE</option>
-      					<option value="IT">IT</option>
-      					<option value="ECE">ECE</option>
-      					<option value="ERE">ERE</option>
-      					<option value="AE&I">AE&I</option>
-      					<option value="Civil">Civil</option>
-    				</select>
-    				<br><br>
-					<label>Staff Advisor</label>
-					<input type="text" name="staff_advisor" placeholder="Enter Staff Advisor Name">
-					<br><br>
-    				<label>Company</label>
-    				<input type="text" name="company" placeholder="Company">
-    				<br><br>
-    				<label>Designation</label>
-    				<input type="text" name="designation" placeholder="Designation">
-   					 <br><br>
-    				<button type="button" class="prev-btn">Previous</button>
     				<button type="submit" class="common-btn">Sign Up</button>
   				</div>
 
