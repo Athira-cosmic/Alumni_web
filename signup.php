@@ -1,42 +1,40 @@
 <?php
-if($_SERVER['REQUEST_METHOD']=='POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include 'connect.php';
-    
-    // Fetch form data
-    $reg_no=$_POST['reg_no'];
-    $name=$_POST['name'];
-    $email=$_POST['email'];
-	$linkedin=$_POST['linkedin'];
-    $password=$_POST['password'];
-    $ph_no=$_POST['ph_no'];
-    $address_line1=$_POST['address_line1'];
-	$address_line2=$_POST['address_line2'];
-	$city=$_POST['city'];
-	$state=$_POST['state'];
-	$postal_code=$_POST['postal_code'];
-	$country=$_POST['country'];
-    $year_of_passout=$_POST['year_of_passout'];
-    $course=$_POST['course'];
-    $department=$_POST['department'];
-    $company=$_POST['company'];
-    $designation=$_POST['designation'];
 
-    // Set initial status to 'pending'
+    // Fetch and sanitize all fields
+    $reg_no = mysqli_real_escape_string($con, $_POST['reg_no']);
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $linkedin = mysqli_real_escape_string($con, $_POST['linkedin']);
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $ph_no = mysqli_real_escape_string($con, $_POST['ph_no']);
+    $address_line1 = mysqli_real_escape_string($con, $_POST['address_line1']);
+    $address_line2 = mysqli_real_escape_string($con, $_POST['address_line2']);
+    $city = mysqli_real_escape_string($con, $_POST['city']);
+    $state = mysqli_real_escape_string($con, $_POST['state']);
+    $postal_code = mysqli_real_escape_string($con, $_POST['postal_code']);
+    $country = mysqli_real_escape_string($con, $_POST['country']);
+    $year_of_passout = mysqli_real_escape_string($con, $_POST['year_of_passout']);
+    $course = mysqli_real_escape_string($con, $_POST['course']);
+    $department = mysqli_real_escape_string($con, $_POST['department']);
+    $company = mysqli_real_escape_string($con, $_POST['company']);
+    $designation = mysqli_real_escape_string($con, $_POST['designation']);
+
     $status = 'pending';
 
-    // Insert user data into the database
-$sql="INSERT INTO `registration` (reg_no, name, email, linkedin, password, ph_no, address_line1, address_line2, city, state, postal_code, country, year_of_passout, course, department, company, designation, status)
-          VALUES ('$reg_no', '$name', '$email', '$linkedin', '$password', '$ph_no', '$address_line1', '$address_line2','$city', '$state', '$postal_code', '$country',  '$year_of_passout', '$course', '$department', '$company', '$designation', '$status')";
+    $sql = "INSERT INTO registration 
+        (reg_no, name, email, linkedin, password, ph_no, address_line1, address_line2, city, state, postal_code, country, year_of_passout, course, department, company, designation, status)
+        VALUES 
+        ('$reg_no', '$name', '$email', '$linkedin', '$password', '$ph_no', '$address_line1', '$address_line2', '$city', '$state', '$postal_code', '$country', '$year_of_passout', '$course', '$department', '$company', '$designation', '$status')";
 
-    $result=mysqli_query($con,$sql);
-    
-    if($result){
-        header('location:signin.php');
-    }else{
+    if (mysqli_query($con, $sql)) {
+        header('Location: signin.php');
+        exit();
+    } else {
         echo "Error: " . mysqli_error($con);
     }
 }
-
 ?>
 
 
@@ -73,6 +71,34 @@ $sql="INSERT INTO `registration` (reg_no, name, email, linkedin, password, ph_no
 	<link rel="stylesheet" href="assets/css/style.css">
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
+	<style>
+    	.form-step { display: none; }
+    	.form-step.active { display: block; }
+  		.common-btn, .next-btn, .prev-btn {
+    	padding: 8px 16px;
+    	margin-top: 10px;
+    	cursor: pointer;
+  		}
+		input, select {
+  			width: 100%;
+  			padding: 10px;
+  			border: 1px solid #ccc;
+  			border-radius: 4px;
+  			font-size: 16px;
+  			font-family: inherit;
+  			box-sizing: border-box;
+			}
+
+		select {
+  			appearance: none; /* Removes default dropdown arrow (optional) */
+  			background-color: #fff;
+  			background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  			background-repeat: no-repeat;
+  			background-position-x: 98%;
+  			background-position-y: center;
+  			padding-right: 30px; /* Space for the arrow */
+			}
+	</style>
 	
 
 </head>
@@ -210,91 +236,107 @@ $sql="INSERT INTO `registration` (reg_no, name, email, linkedin, password, ph_no
                
                
             </div>
-            <form action="signup.php" method="post" class="contact-input mt-5 position-relative">
-               <div class="row">
-                <label>Registration Number</label>
-                <input type="text" name="reg_no" placeholder="Register no">
-                <br>
-                <br>
-				<label>Name</label>
-                <input type="text" name="name" placeholder="Name">
-                <br>
-                <br>
-                <label>E-Mail</label>
-                <input type="email"  id="email"name="email" placeholder="Email">
-                <br>
-				<br>
-                <label>LinkedIn</label>
-                <input type="text"  id="linkedin"name="linkedin" placeholder="Linkedin">
-                <br>
-                <br>
-                <label>Password</label>
-                <input type="password"  id="password"name="password" placeholder="Password" >
-                <br>
-                <br>
-                <label>Contact</label>
-                <input type="text" name="ph_no"  placeholder="Contact">
-                <br>
-                <br>
-                <label>Address Line 1</label><br>
-                <input name="address_line1" placeholder="Address Line 1">
-                <br><br>
-				<label>Address Line 2</label><br>
-				<input name="address_line2" placeholder="Address Line 2">
-				<br><br>
-				<label>City</label><br>
-				<input name="city" placeholder="City">
-				<br><br>
-				<label>State</label><br>
-				<input name="state" placeholder="State">
-				<br><br>
-				<label>Country</label><br>
-				<input name="country" placeholder="Country">
-				<br><br>
-				<label>Pincode</label><br>
-				<input name="postal_code" placeholder="Pincode">
-                <label>Year of Passout</label>
-                <input  type="year" name=year_of_passout placeholder="Year"><br><br>
-                <label>Course</label>
-                <select name="course">
-                    <option>Select</option>
-                    <option>BTech</option>
-					<option>MTech</option>
-					<option>PhD</option>
-                </select>
-                <label>Department</label>
-                <select name="department">
-                    <option>Select</option>
-                    <option>CSE</option>
-                    <option>IT</option>
-                    <option>ECE</option>
-					<option>ERE</option>
-                    <option>AE&I</option>
-                    <option>Civil</option>
-                </select>
-                <br>
-                <br>
-                
-                <label>Company</label>
-                <input type="text" name="company" placeholder="Company">
-                <br>
-                <br>
-                
-                <label>Designation</label>
-                <input type="text" name="designation" placeholder="Designation">
-                <br>
-                <br>
-                
-                  
-                  <div class="col-xl-7 col-lg-10 col-sm-12 col-12">
-                     
-                  </div>
-                  <div class="contact-btn-wrap mt-5">
-                     <button type="submit" class="common-btn">Sign Up</button>
-                  </div>
-                  <p class="form-message"></p>
-               </div>
-            </form>
+            <form id="signupForm" action="signup.php" method="post" class="contact-input mt-5 position-relative">
+
+  				<!-- Step 1 -->
+  				<div class="form-step active">
+    				<h3>Basic Info</h3>
+    				<label>Registration Number</label>
+    				<input type="text" name="reg_no" placeholder="Register no" required>
+    				<br><br>
+    				<label>Name</label>
+    				<input type="text" name="name" placeholder="Name" required>
+    				<br><br>
+    				<label>E-Mail</label>
+    				<input type="email" name="email" placeholder="Email" required>
+    				<br><br>
+    				<label>LinkedIn</label>
+    				<input type="text" name="linkedin" placeholder="Linkedin">
+    				<br><br>
+    				<button type="button" class="next-btn">Next</button>
+  				</div>
+
+  				<!-- Step 2 -->
+  				<div class="form-step">
+    				<h3>Security & Contact</h3>
+    				<label>Password</label>
+    				<input type="password" name="password" placeholder="Password" required>
+    				<br><br>
+    				<label>Contact</label>
+    				<input type="tel" name="ph_no" placeholder="Contact" pattern="[0-9]{10}" required>
+    				<br><br>
+    				<button type="button" class="prev-btn">Previous</button>
+    				<button type="button" class="next-btn">Next</button>
+  				</div>
+
+  				<!-- Step 3 -->
+  				<div class="form-step">
+    				<h3>Address</h3>
+   		 			<label>Address Line 1</label><br>
+    				<input name="address_line1" placeholder="Address Line 1" required>
+    				<br><br>
+    				<label>Address Line 2</label><br>
+    				<input name="address_line2" placeholder="Address Line 2">
+    				<br><br>
+    				<label>City</label><br>
+    				<input name="city" placeholder="City" required>
+    				<br><br>
+    				<label>State</label><br>
+    				<input name="state" placeholder="State" required>
+    				<br><br>
+    				<label>Country</label><br>
+    				<input name="country" placeholder="Country" required>
+    				<br><br>
+    				<label>Pincode</label><br>
+    				<input name="postal_code" placeholder="Pincode" required>
+    				<br><br>
+    				<button type="button" class="prev-btn">Previous</button>
+    				<button type="button" class="next-btn">Next</button>
+  				</div>
+
+  				<!-- Step 4 -->
+  				<div class="form-step">
+    				<h3>Education & Work</h3>
+    				<label>Year of Passout</label>
+    				<select name="year_of_passout" required>
+    					<option value="">Select Year</option>
+    					<?php
+        					$currentYear = date("Y");
+        					for ($year = 2004; $year <= $currentYear; $year++) {
+            				echo "<option value='$year'>$year</option>";
+        					}
+    					?>
+					</select>
+    				<label>Course</label>
+    				<select name="course" required>
+      					<option value="">Select</option>
+      					<option value="BTech">BTech</option>
+      					<option value="MTech">MTech</option>
+      					<option value="PhD">PhD</option>
+    				</select>
+    				<br><br>
+    				<label>Department</label>
+    				<select name="department" required>
+      					<option value="">Select</option>
+      					<option value="CSE">CSE</option>
+      					<option value="IT">IT</option>
+      					<option value="ECE">ECE</option>
+      					<option value="ERE">ERE</option>
+      					<option value="AE&I">AE&I</option>
+      					<option value="Civil">Civil</option>
+    				</select>
+    				<br><br>
+    				<label>Company</label>
+    				<input type="text" name="company" placeholder="Company">
+    				<br><br>
+    				<label>Designation</label>
+    				<input type="text" name="designation" placeholder="Designation">
+   					 <br><br>
+    				<button type="button" class="prev-btn">Previous</button>
+    				<button type="submit" class="common-btn">Sign Up</button>
+  				</div>
+
+			</form>
 			</div>
 		</div>
 	</div>
@@ -375,6 +417,41 @@ $sql="INSERT INTO `registration` (reg_no, name, email, linkedin, password, ph_no
 <script src="assets/js/viewport.jquery.js"></script>
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
+<script>
+  const nextBtns = document.querySelectorAll('.next-btn');
+  const prevBtns = document.querySelectorAll('.prev-btn');
+  const formSteps = document.querySelectorAll('.form-step');
+  let currentStep = 0;
+
+  nextBtns.forEach(button => {
+    button.addEventListener('click', () => {
+      if (validateStep(currentStep)) {
+        formSteps[currentStep].classList.remove('active');
+        currentStep++;
+        formSteps[currentStep].classList.add('active');
+      }
+    });
+  });
+
+  prevBtns.forEach(button => {
+    button.addEventListener('click', () => {
+      formSteps[currentStep].classList.remove('active');
+      currentStep--;
+      formSteps[currentStep].classList.add('active');
+    });
+  });
+
+  function validateStep(step) {
+    const inputs = formSteps[step].querySelectorAll('input, select');
+    for (let input of inputs) {
+      if (input.hasAttribute('required') && !input.value) {
+        alert('Please fill all required fields');
+        return false;
+      }
+    }
+    return true;
+  }
+</script>
 
 </body>
 
