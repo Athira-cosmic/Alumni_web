@@ -225,6 +225,9 @@ if (!isset($_SESSION['admin_logged_in'])) {
 								<a href="#notify">Announcements</a>
 								
 							</li>
+                            <li>
+	                            <a href="view_alumni.php">View Alumni</a>
+                            </li>
 						</ul>
 					</nav>
 				</div>
