@@ -20,6 +20,7 @@ if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && 
         $department = $user_details['department'];
         $graduation_year = $user_details['year_of_passout'];
         $current_position = $user_details['designation'];
+		$staff_advisor = $user_details['staff_advisor'];
         $email = $user_details['email'];
 		$linkedin = $user_details['linkedin'];
     } else {
@@ -214,8 +215,7 @@ if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && 
 	</div>
 	<div class="menu-info-wrap d-none d-xxl-block position-absolute">
 		<div class="menu-info-shape position-relative">
-			<img src="assets/images/shape/menu.png" alt="">
-			<a href="https://themeforest.wprealizer.com/cdn-cgi/l/email-protection#e999869b889a9c8788c780878f86a98e84888085c78a8684"><i class="bi bi-envelope-fill"></i> <span class="__cf_email__" data-cfemail="aadac5d8cbd9dfc4cb84c3c4ccc5eacecfc7c584c9c5c7">[email&#160;protected]</span></a>
+			
 		</div>
 		
 	</div>
@@ -275,6 +275,10 @@ if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && 
         <tr>
             <th width="30%">Current Position</th>
             <td><?php echo isset($current_position) ? $current_position : ''; ?></td>
+        </tr>
+		<tr>
+            <th width="30%">Staff Advisor</th>
+            <td><?php echo isset($staff_advisor) ? $staff_advisor : ''; ?></td>
         </tr>
 				
 			  </table>

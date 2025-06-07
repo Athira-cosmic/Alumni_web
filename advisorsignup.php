@@ -149,18 +149,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 							<li><a href="contact.html">Contact</a></li>
 						</ul>
 						<div class="menu-btn-wrap d-block d-lg-none">
-							<a class="menu-btn" href="signin.php"><i class="bi bi-person"></i> Sign-In</a>
+							<a class="menu-btn" href="advisorsignin.php"><i class="bi bi-person"></i> Sign-In</a>
 						</div>
 						<div class="menu-btn-wrap d-block d-lg-none">
-							<a class="menu-btn" href="signup.php" class="active"><i class="bi bi-person"></i> Sign-up</a>
+							<a class="menu-btn" href="advisorsignup.php" class="active"><i class="bi bi-person"></i> Sign-up</a>
 						</div>
 					</nav>
 				</div>
 				<div class="col-xxl-2 col-xl-3 col-lg-3 col-sm-5 col-5 order-1 order-lg-2">
 					<div class="menu-btn-wrap ">
-						<a class="menu-btn d-none d-lg-block" href="signin.php"><i class="bi bi-person"></i> Sign-In</a>
+						<a class="menu-btn d-none d-lg-block" href="advisorsignin.php"><i class="bi bi-person"></i> Sign-In</a>
 
-						<a class="menu-btn d-none d-lg-block" href="signup.php"><i class="bi bi-person"></i> Sign-up</a>
+						<a class="menu-btn d-none d-lg-block" href="advisorsignup.php"><i class="bi bi-person"></i> Sign-up</a>
 						
 						</div>
 					</div>
@@ -220,7 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                
                
             </div>
-            <form id="signupForm" action="signup.php" method="post" class="contact-input mt-5 position-relative">
+            <form id="signupForm" action="advisorsignup.php" method="post" class="contact-input mt-5 position-relative">
 
   				<!-- Step 1 -->
   				<div class="form-step active">

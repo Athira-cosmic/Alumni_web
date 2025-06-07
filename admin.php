@@ -305,7 +305,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
                         <!-- Card widgets here -->
                     </div>
                     <h4 class="header-title mb-0">Advisors Requests:</h4><br><br>
-                    <div id="memberRequests" class="row">
+                    <div id="staffRequests" class="row">
                         <?php
                         $requests = fetchPendingStaffRequests($con);
                         foreach ($requests as $request) {
