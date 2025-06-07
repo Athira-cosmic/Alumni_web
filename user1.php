@@ -35,10 +35,10 @@ if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && 
     exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['regNumber'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ph_no = $_POST['ph_no'];
     $address_line1 = $_POST['address_line1'];
-    $ddress_line2 = $_POST['ddress_line2'];
+    $address_line2 = $_POST['address_line2'];
     $city = $_POST['city'];
     $state = $_POST['state'];
     $country = $_POST['country'];
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['regNumber'])) {
                   SET ph_no = ?, address_line1 = ?, address_line2 = ?, city = ?, state = ?, country = ?, company = ?, designation = ?, email = ?
                   WHERE reg_no = ?";
     $stmt = mysqli_prepare($con, $updateSql);
-    mysqli_stmt_bind_param($stmt, "ssssssssss", $ph_no, $address_line1, $address_line1, $city, $state, $country, $company, $designation, $email, $reg_no);
+    mysqli_stmt_bind_param($stmt, "ssssssssss", $ph_no, $address_line1, $address_line2, $city, $state, $country, $company, $designation, $email, $reg_no);
 
     if (mysqli_stmt_execute($stmt)) {
         echo "<script>alert('Profile updated successfully'); window.location.href=window.location.href;</script>";
@@ -60,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['regNumber'])) {
 
     mysqli_stmt_close($stmt);
 }
+
 
 ?>
 <!doctype html>
