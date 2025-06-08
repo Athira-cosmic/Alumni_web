@@ -340,26 +340,26 @@
 	   <div class="blog-slide-wrap owl-carousel"> 
 		<div class="single-courses-box single-courses-box-2"> 
 			<div class="courses-img"> 
-			<a href="case-details.html"><img class="w-100" src="assets/images/courses/remix23.jpg" alt=""></a> 
+			<img class="w-100" src="assets/images/courses/remix23.jpg" alt="">
 			</div> 
 			<div class="courses-content"> 
-			<h2><a href="case-details.html">REMIX'23</a></h2> 
+			<h2>REMIX'23</h2> 
 			<div class="courses-meta"> 
 			<ul> 
-			<li><a href="#"> 16 April </a></li> 
+			<li>16 April</li> 
 			</ul> 
 			</div> 
 			</div> 
 		 </div> 
 		 <div class="single-courses-box single-courses-box-2"> 
 			<div class="courses-img"> 
-			<a href="case-details.html"><img class="w-100" src="assets/images/courses/union23.jpg" alt=""></a> 
+			<img class="w-100" src="assets/images/courses/union23.jpg" alt="">
 			</div> 
 			<div class="courses-content"> 
-			<h2><a href="case-details.html">UNION DAY'23</a></h2> 
+			<h2>UNION DAY'23</h2> 
 			<div class="courses-meta"> 
 			<ul> 
-			<li><a href="#"> 31 March </a></li> 
+			<li>31 March</li> 
 			</ul> 
 			</div> 
 			</div> 
@@ -367,13 +367,13 @@
 		
 		<div class="single-courses-box single-courses-box-2"> 
 		 <div class="courses-img"> 
-			<a href="case-details.html"><img class="w-100" src="assets/images/courses/iham22.jpg" alt=""></a> 
+			<img class="w-100" src="assets/images/courses/iham22.jpg" alt="">
 		 </div> 
 		 <div class="courses-content"> 
-			<h2><a href="case-details.html">IHAM</a></h2> 
+			<h2>IHAM</h2> 
 			<div class="courses-meta"> 
 			<ul> 
-			<li><a href="#"> 1 July</a></li> 
+			<li>1 July</li> 
 			</ul> 
 			</div> 
 		 </div> 
@@ -381,39 +381,39 @@
 		
 		<div class="single-courses-box single-courses-box-2"> 
 		 <div class="courses-img"> 
-			<a href="case-details.html"><img class="w-100" src="assets/images/courses/yd22.jpg" alt=""></a> 
+			<img class="w-100" src="assets/images/courses/yd22.jpg" alt="">
 		 </div> 
 		 <div class="courses-content"> 
-			<h2><a href="case-details.html">YAGNA DHRUVA'22</a></h2> 
+			<h2>YAGNA DHRUVA'22</h2> 
 			<div class="courses-meta"> 
 			<ul> 
-			<li><a href="#"> 3,4 & 5 June</a></li> 
+			<li>3,4 & 5 June</li> 
 			</ul> 
 			</div> 
 		 </div> 
 		 </div> 
 		 <div class="single-courses-box single-courses-box-2"> 
 		 <div class="courses-img"> 
-			<a href="case-details.html"><img class="w-100" src="assets/images/courses/prayaag.jpg" alt=""></a> 
+			<img class="w-100" src="assets/images/courses/prayaag.jpg" alt=""> 
 		 </div> 
 		 <div class="courses-content"> 
-			<h2><a href="case-details.html">PRAYAAG 2.O</a></h2> 
+			<h2>PRAYAAG 2.O</h2> 
 			<div class="courses-meta"> 
 			<ul> 
-			<li><a href="#"> 14 & 15 May</a></li> 
+			<li>14 & 15 May</li> 
 			</ul> 
 			</div> 
 		 </div> 
 		 </div> 
 		 <div class="single-courses-box single-courses-box-2"> 
 		 <div class="courses-img"> 
-			<a href="case-details.html"><img class="w-100" src="assets/images/courses/yavanika22.jpg" alt=""></a> 
+			<img class="w-100" src="assets/images/courses/yavanika22.jpg" alt="">
 		 </div> 
 		 <div class="courses-content"> 
 			<h2><a href="case-details.html">YAVANIKA'22</a></h2> 
 			<div class="courses-meta"> 
 			<ul> 
-			<li><a href="#"> 23 & 24 April</a></li> 
+			<li>23 & 24 April</li> 
 			</ul> 
 			</div> 
 		 </div> 
