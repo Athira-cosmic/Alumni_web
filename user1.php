@@ -101,50 +101,96 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		.modal-bg {
             display: none;
             position: fixed;
-            z-index: 1000;
-            padding-top: 80px;
+            z-index: 999;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
+            backdrop-filter: blur(6px);
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
             overflow: auto;
-            background-color: rgba(0,0,0,0.5);
         }
         .modal-content {
             background-color: #fff;
-            margin: auto;
-            padding: 30px;
-            border: 1px solid #888;
-            width: 400px;
-            border-radius: 8px;
-            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh; /* Important: don't let modal go beyond screen */
+            overflow-y: auto; /* Allows scrolling within the modal */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
+        @keyframes fadeIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+            }
         .close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 24px;
+            float: right;
+            font-size: 26px;
             font-weight: bold;
+            color: #666;
             cursor: pointer;
-        }
+            }
+        .close:hover {
+            color: #e74c3c;
+            }
         label { font-weight: bold; }
         input[type="text"], input[type="email"] {
             width: 100%;
             padding: 8px;
             margin-bottom: 12px;
         }
-        input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #004c99;
-            color: white;
-            border: none;
-            cursor: pointer;
+        /* Form elements */
+        .modal-content form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
         }
+
+        .modal-content form input[type="text"],
+        .modal-content form input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .modal-content form input[type="text"]:focus,
+        .modal-content form input[type="email"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+/* Submit button */
+        .modal-content form input[type="submit"] {
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content form input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        .modal-bg {
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
         #editProfileBtn {
             display: inline-block;
             margin: 20px;
             padding: 10px 20px;
-            background: #0066cc;
+            
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
@@ -181,33 +227,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-top: 10px;
 			object-fit:cover;
         }
-		.modal-bg {
-			display: none;
-			position: fixed;
-			z-index: 9999;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			background-color: rgba(0, 0, 0, 0.5);
-			overflow: auto;
-		}
-		.modal-content {
-			background-color: #ffffff;
-			margin: 5% auto; 
-			padding: 30px; 
-			border: 2px solid rgb(203, 175, 240);
-			max-width: 600px;
-			width: 30%; 
-			height:70%;
-			box-shadow: 0 2px 30px rgba(9, 2, 82, 0.637);
-			animation-name: modalopen;
-			animation-duration: 0.5s;
-		}
-		@keyframes modalopen {
-			from {opacity: 0}
-			to {opacity: 1}
-		}
 		input[type=text] {
 			width: 100%;
 			border-radius: 30px;
@@ -276,6 +295,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							<a href="index.php"><img src="assets/images/collegelogo2.png" alt=""></a>
 						</div>
 						<ul>
+                            <li>
+								<a href="index.php">Home</a>
+							</li>
 							<li>
 								<a href="user1.php" class="active">Dashboard</a>
 							</li>
@@ -521,7 +543,7 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $alumni = mysqli_fetch_assoc($result);
 ?>
-<div id="editProfileModal" class="modal-bg">
+<div id="editProfileModal" class="modal-bg" style="display: none;">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Edit Profile</h2>
@@ -560,29 +582,36 @@ $alumni = mysqli_fetch_assoc($result);
 
 <script>
     function openModal() {
-        document.getElementById('editProfileModal').style.display = "block";
+        const modal = document.getElementById('editProfileModal');
+        if (modal) modal.style.display = "flex"; // Use flex to center modal
     }
 
     function closeModal() {
-        document.getElementById('editProfileModal').style.display = "none";
+        const modal = document.getElementById('editProfileModal');
+        if (modal) modal.style.display = "none";
     }
 
-    document.getElementById("editProfileBtn").addEventListener("click", function(event) {
-        event.preventDefault();
-        openModal();
-    });
-
-    // Close modal when clicking outside content
-    window.onclick = function(event) {
-        let modal = document.getElementById('editProfileModal');
-        if (event.target == modal) {
-            closeModal();
+    window.onload = function () {
+        const editBtn = document.getElementById("editProfileBtn");
+        if (editBtn) {
+            editBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                openModal();
+            });
         }
+
+        // Close modal when clicking outside the modal content
+        window.onclick = function (event) {
+            const modal = document.getElementById('editProfileModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
     }
+
     function validateForm() {
         const phone = document.getElementById('ph_no').value.trim();
         const email = document.getElementById('email').value.trim();
-
         const phoneRegex = /^[0-9]{10,15}$/;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

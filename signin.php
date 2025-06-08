@@ -136,7 +136,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 							<li>
 								<a href="index.php" class="active">Home</a>
 							</li>
-							<li><a href="#section1">About</a></li>
+							<li><a href="about-us.html">About</a></li>
 							
 							<li>
 								<a href="case-study.html">Events</a>
@@ -144,23 +144,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 							</li>
 							
 							<li><a href="contact.html">Contact</a></li>
+							<li><a class="menu-btn" href="signin.php" class="active"><i class="bi bi-person"></i> Sign-In</a></li>
+							<li><a class="menu-btn" href="signup.php"><i class="bi bi-person"></i> Sign-up</a></li>
 						</ul>
-						<div class="menu-btn-wrap d-block d-lg-none">
-							<a class="menu-btn" href="signin.php"><i class="bi bi-person"></i> Sign-In</a>
-						</div>
-						<div class="menu-btn-wrap d-block d-lg-none">
-							<a class="menu-btn" href="signup.php"><i class="bi bi-person"></i> Sign-up</a>
-						</div>
 					</nav>
 				</div>
-				<div class="col-xxl-2 col-xl-3 col-lg-3 col-sm-5 col-5 order-1 order-lg-2">
-					<div class="menu-btn-wrap ">
-						<a class="menu-btn d-none d-lg-block" href="signin.php"><i class="bi bi-person"></i> Sign-In</a>
-
-						<a class="menu-btn d-none d-lg-block" href="signup.php"><i class="bi bi-person"></i> Sign-up</a>
-						
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -188,12 +176,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
          </div>
          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mobt-24">
             <div class="breadcrumb-link text-start text-lg-end">
-               <h4><a href="index.php">Home</a> > Sign In</h4>
+              
             </div>
          </div>
       </div>
    </div>
-	<img class="shape breadcrumb-round-1 d-lg-block d-none" src="assets/images/shape/breadcrumb-round.png" alt="">
+	
 </div>
 
 <!-- Breadcrumb End -->

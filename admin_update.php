@@ -113,13 +113,9 @@
 							<a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a>
 						</div>
 						<ul>
+							<li><a href="index.php">Home</a></li>
 							<li>
-								<a href="admin.php" class="active">Admin Dashboard</a>
-							</li>
-							
-							<li>
-								<a href="#notify">Announcements</a>
-								
+								<a href="admin.php">Admin Dashboard</a>
 							</li>
 						</ul>
 					</nav>
@@ -175,8 +171,7 @@
                                 echo "<h5>" . $row['title'] . "</h5>";
                                 echo "<img src='" . $row['image'] . "' alt='Announcement Image' style='margin: 2px;'>";
                                 echo "<div>";
-                                echo "<a href='edit_announcement.php?id=" . $row['id'] . "'class='btn btn-primary me-2'>Edit</a>";
-                                echo "<a href='delete_announcement.php?id=" . $row['id'] . "'class='btn btn-danger'>Delete</a>";
+                                echo "<a href='javascript:void(0);' onclick='deleteAnnouncement(" . $row['id'] . ")' class='btn btn-danger'>Delete</a>";
                                 echo "</div>";
                                 echo "</div>";
                             }
@@ -281,6 +276,41 @@
 <script src="assets/js/viewport.jquery.js"></script>
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+	function deleteAnnouncement(id) {
+    if (!confirm("Are you sure you want to delete this announcement?")) return;
+
+    $.ajax({
+        url: 'delete_announcement.php?id=' + id,
+        type: 'GET',
+        success: function(response) {
+            response = response.trim();
+            if (response === "success") {
+                alert("Announcement deleted successfully.");
+                location.reload();  // reload page after closing alert
+            } else if (response.startsWith("error:")) {
+                alert("Error: " + response.substring(6));
+            } else if (response === "invalid") {
+                alert("Invalid announcement ID.");
+            } else {
+                Swal.fire({
+  				icon: 'success',
+  				title: 'Deleted!',
+  				text: 'Announcement deleted successfully.',
+  				timer: 2000,
+  				showConfirmButton: false
+				});
+            }
+        },
+        error: function() {
+            alert("Failed to communicate with server.");
+        }
+    });
+}
+
+</script>
+
 
 </body>
 

@@ -94,27 +94,13 @@
 							</li>
 							
 							<li><a href="contact.html">Contact</a></li>
-							<li>
-								<a href="adminlogin.php">Admin</a>
-								
-							</li>
+							
+							<li><a class="menu-btn" href="signin.php"><i class="bi bi-person"></i> Sign-In</a></li>
+							<li><a class="menu-btn" href="signup.php"><i class="bi bi-person"></i> Sign-up</a></li>
+							
 						</ul>
-						<div class="menu-btn-wrap d-block d-lg-none">
-							<a class="menu-btn" href="signin.php"><i class="bi bi-person"></i> Sign-In</a>
-						</div>
-						<div class="menu-btn-wrap d-block d-lg-none">
-							<a class="menu-btn" href="signup.php"><i class="bi bi-person"></i> Sign-up</a>
-						</div>
 					</nav>
 				</div>
-				<div class="col-xxl-2 col-xl-3 col-lg-3 col-sm-5 col-5 order-1 order-lg-2">
-					<div class="menu-btn-wrap ">
-						<a class="menu-btn d-none d-lg-block" href="signin.php"><i class="bi bi-person"></i> Sign-In</a>
-
-						<a class="menu-btn d-none d-lg-block" href="signup.php"><i class="bi bi-person"></i> Sign-up</a>
-						
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -474,6 +460,9 @@
 		<div class="row">
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 				<div class="copy-text copy-text-2 text-center">
+					<li>
+						<a href="adminlogin.php">Admin</a>
+					</li>
 					
 				</div>
 			</div>

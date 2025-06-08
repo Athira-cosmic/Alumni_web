@@ -1,0 +1,12 @@
+RewriteEngine On
+RewriteBase /
+
+# Redirect requests like /about to /about.php
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)/?$ $1.php [L]
+
+# Optional: prevent direct access to PHP files
+<FilesMatch "\.php$">
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*\.php\ HTTP/
+    RewriteRule ^(.*)\.php$ /$1 [R=301,L]
+</FilesMatch>

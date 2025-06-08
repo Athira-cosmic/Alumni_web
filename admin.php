@@ -214,8 +214,9 @@ function fetchPendingStaff($con) {
 							<a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a>
 						</div>
 						<ul>
+                            <li><a href="index.php">Home</a></li>
 							<li>
-								<a href="admin_update.php" class="active">Update Notification</a>
+								<a href="admin_update.php">Update Notification</a>
 							</li>
 							
 							<li>
@@ -374,7 +375,8 @@ function fetchPendingStaff($con) {
                         <!-- end new post -->
                     </div>
                 </form>
-                <div id="success_message"></div>
+                <div id="success_message" style="color: green;"></div>
+                
             </div> <!-- end card-body -->
         </div> <!-- end card-->
     </div> <!-- end col -->
@@ -457,32 +459,34 @@ function fetchPendingStaff($con) {
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#announcementForm').submit(function(event) {
-            event.preventDefault(); // Prevent the default form submission
+    $('#announcementForm').submit(function(event) {
+        event.preventDefault();
 
-            // Create a FormData object
-            var formData = new FormData(this);
+        var formData = new FormData(this);
 
-            $.ajax({
-                url: 'create_announcement.php',
-                type: 'POST',
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    $('#success_message').html(response); // Display the success message
-                    setTimeout(function() {
-                        $('#success_message').fadeOut(); // Fade out the success message after 2 seconds
-                    }, 2000);
-                    $('#announcementForm')[0].reset(); // Reset the form
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
+        $.ajax({
+            url: 'create_announcement.php',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            beforeSend: function() {
+                $('#success_message').html("Submitting...");
+            },
+            success: function(response) {
+                $('#success_message').html(response);
+                setTimeout(function() {
+                    $('#success_message').fadeOut();
+                }, 5000);
+                $('#announcementForm')[0].reset();
+            },
+            error: function(xhr, status, error) {
+                $('#success_message').html('<span style="color:red;">Error submitting announcement.</span>');
+                console.error(xhr.responseText);
+            }
         });
     });
+});
 </script>
 
 

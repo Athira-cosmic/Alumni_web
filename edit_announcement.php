@@ -171,14 +171,12 @@ if (isset($_GET['id'])) {
 							<a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a>
 						</div>
 						<ul>
+							<li><a href="index.php">Home</a></li>
 							<li>
-								<a href="admin.php" class="active">Admin Dashboard</a>
+								<a href="admin.php">Admin Dashboard</a>
 							</li>
+							<li><a href="admin_update.php">Update Notification</a></li>
 							
-							<li>
-								<a href="#notify">Announcements</a>
-								
-							</li>
 						</ul>
 					</nav>
 				</div>
@@ -187,8 +185,7 @@ if (isset($_GET['id'])) {
 	</div>
 	<div class="menu-info-wrap d-none d-xxl-block position-absolute">
 		<div class="menu-info-shape position-relative">
-			<img src="assets/images/shape/menu.png" alt="">
-			<a href="https://themeforest.wprealizer.com/cdn-cgi/l/email-protection#e999869b889a9c8788c780878f86a98e84888085c78a8684"><i class="bi bi-envelope-fill"></i> <span class="__cf_email__" data-cfemail="aadac5d8cbd9dfc4cb84c3c4ccc5eacecfc7c584c9c5c7">[email&#160;protected]</span></a>
+			
 		</div>
 		
 	</div>
