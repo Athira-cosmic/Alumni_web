@@ -1939,7 +1939,7 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus {
 
 .footer-area {
   background: #fff;
-  background-image: url(../images/shape/footer-1.jpg);
+  background-image: url(../images/shape/footer-1.png);
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -1947,7 +1947,7 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus {
 }
 
 .footer-area.footer-area-style-2 {
-  background-image: url(../images/shape/footer-2.jpg);
+  background-image: url(../images/shape/footer-2.png);
 }
 
 .footer-area.footer-area-style-2 .footer-social ul li i {
@@ -1983,7 +1983,7 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus {
 }
 
 .footer-area.footer-area-style-3 {
-  background-image: url(../images/shape/footer-3.jpg);
+  background-image: url(../images/shape/footer-3.png);
   padding: 220px 0 7px;
 }
 
