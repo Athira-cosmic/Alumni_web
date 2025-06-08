@@ -110,9 +110,9 @@ $alumni = mysqli_fetch_assoc($result);
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Edit Profile</h2>
-        <form id="profileForm" method="POST">
+        <form id="profileForm" method="POST" onsubmit="return validateForm();">
             <label for="ph_no">Contact</label>
-            <input type="text" id="ph_no" name="ph_no" value="<?= htmlspecialchars($alumni['ph_no']) ?>">
+            <input type="text" id="ph_no" name="ph_no" pattern="[0-9]{10,15}" title="Enter a valid phone number (10-15 digits)" value="<?= htmlspecialchars($alumni['ph_no']) ?>">
 
             <label for="address_line1">Address Lane 1:</label>
             <input type="text" id="address_line1" name="address_line1" value="<?= htmlspecialchars($alumni['address_line1']) ?>">
@@ -163,6 +163,25 @@ $alumni = mysqli_fetch_assoc($result);
         if (event.target == modal) {
             closeModal();
         }
+    }
+    function validateForm() {
+        const phone = document.getElementById('ph_no').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        const phoneRegex = /^[0-9]{10,15}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!phoneRegex.test(phone)) {
+            alert("Please enter a valid phone number (10–15 digits).");
+            return false;
+        }
+
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        return true;
     }
 </script>
 

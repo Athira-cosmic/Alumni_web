@@ -26,15 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $sql = "INSERT INTO registration 
         (reg_no, name, email, linkedin, password, ph_no, address_line1, address_line2, city, state, postal_code, country, year_of_passout, course, department, staff_advisor, company, designation, status)
-        VALUES 
-        ('$reg_no', '$name', '$email', '$linkedin', '$password', '$ph_no', '$address_line1', '$address_line2', '$city', '$state', '$postal_code', '$country', '$year_of_passout', '$course', '$department', '$staff_advisor', '$company', '$designation', '$status')";
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    if (mysqli_query($con, $sql)) {
-        header('Location: signin.php');
-        exit();
-    } else {
-        echo "Error: " . mysqli_error($con);
-    }
+		$stmt = mysqli_prepare($con, $sql);
+		mysqli_stmt_bind_param($stmt, "ssssssssssssissssss", 
+    $reg_no, $name, $email, $linkedin, $password, $ph_no, $address_line1, $address_line2, $city, $state, $postal_code, $country, $year_of_passout, $course, $department, $staff_advisor, $company, $designation, $status);
+
+		if (mysqli_stmt_execute($stmt)) {
+    		header('Location: signin.php');
+    		exit();
+		} else {
+    		echo "Error: " . mysqli_error($con);
+		}
+
+		mysqli_stmt_close($stmt);
 }
 ?>
 
