@@ -1558,7 +1558,6 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   background: url(../images/animated-text-fill.png) repeat-y;
-  -webkit-background-clip: text;
   /* Animate Background Image */
   -webkit-text-fill-color: #6440fab8;
   -webkit-animation: aitf 80s linear infinite;
