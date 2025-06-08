@@ -371,6 +371,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						
 						<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
 							<h2 style="color: #f6f6f6;text-align: right;padding-right:80px;">Made With <span id="boot-icon" class="bi bi-heart-fill" style="font-size: 3rem; color: rgb(255, 0, 0);"></span></h2>
+							<p style="color: white";>Copyright &copy; 2025. Design and Development by WEB TEAM LBSITW</p>
 						</div>
 						
 						</div>

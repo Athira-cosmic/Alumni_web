@@ -82,6 +82,29 @@ if (mysqli_num_rows($result) > 0) {
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
     <style>
+        .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.alumni-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    min-width: 600px; /* Optional: Ensures scroll on small screens */
+}
+
+.alumni-table th, .alumni-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.alumni-table th {
+    background-color: #333;
+    color: #fff;
+}
         body { font-family: Arial; padding: 0; background: none; }
         table {
         width: 100%;
@@ -309,8 +332,8 @@ if (mysqli_num_rows($result) > 0) {
 
     <button type="button" id="clearFiltersBtn" onclick="window.location.href='<?= $_SERVER['PHP_SELF'] ?>'">Clear Filters</button>
 </form>
-
-<table>
+<div class="table-responsive"></div>
+<table class="alumni-table">
     <tr>
         <th>Name</th>
         <th>Register No</th>
@@ -349,7 +372,7 @@ if (mysqli_num_rows($result) > 0) {
     }
     ?>
 </table>
-
+</div>
 <button id="downloadBtn">Download CSV</button>
 <div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-color: #F6F6F6;">
 	<div class="container">
@@ -380,6 +403,7 @@ if (mysqli_num_rows($result) > 0) {
 						
 						<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
 							<h2 style="color: #f6f6f6;text-align: right;padding-right:80px;">Made With <span id="boot-icon" class="bi bi-heart-fill" style="font-size: 3rem; color: rgb(255, 0, 0);"></span></h2>
+                            <p style="color: white";>Copyright &copy; 2025. Design and Development by WEB TEAM LBSITW</p>
 						</div>
 						
 						</div>

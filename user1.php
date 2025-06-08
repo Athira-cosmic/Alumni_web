@@ -99,33 +99,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<style>
         /* Some basic CSS for styling */
 		.modal-bg {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            backdrop-filter: blur(6px);
-            background-color: rgba(0, 0, 0, 0.4);
-            justify-content: center;
-            align-items: center;
+            display: none; 
+            position: fixed; 
+            z-index: 999; 
+            left: 0; top: 0;
+            width: 100vw; height: 100vh;
             overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6); /* translucent background */
         }
         .modal-content {
             background-color: #fff;
+            margin: 5% auto;
             padding: 20px;
             border-radius: 10px;
             width: 90%;
             max-width: 600px;
-            max-height: 90vh; /* Important: don't let modal go beyond screen */
-            overflow-y: auto; /* Allows scrolling within the modal */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
         }
         @keyframes fadeIn {
             from { transform: scale(0.9); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
             }
+        .modal-content .close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
         .close {
             float: right;
             font-size: 26px;
@@ -492,6 +493,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						
 						<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
 							<h2 style="color: #f6f6f6;text-align: right;padding-right:80px;">Made With <span id="boot-icon" class="bi bi-heart-fill" style="font-size: 3rem; color: rgb(255, 0, 0);"></span></h2>
+                            <p style="color: white";>Copyright &copy; 2025. Design and Development by WEB TEAM LBSITW</p>
 						</div>
 						
 						</div>
