@@ -84,19 +84,19 @@
 						</div>
 						<ul>
 							<li>
-								<a href="index.php" class="active">Home</a>
+								<a href="index.php" class="active" style="color: white;">Home</a>
 							</li>
-							<li><a href="#section1">About</a></li>
+							<li><a href="#section1" style="color: white;">About</a></li>
 							
 							<li>
-								<a href="case-study.html">Events</a>
+								<a href="case-study.html" style="color: white;">Events</a>
 								
 							</li>
 							
-							<li><a href="contact.html">Contact</a></li>
+							<li><a href="contact.html" style="color: white;">Contact</a></li>
 							
-							<li><a class="menu-btn" href="signin.php"><i class="bi bi-person"></i> Sign-In</a></li>
-							<li><a class="menu-btn" href="signup.php"><i class="bi bi-person"></i> Sign-up</a></li>
+							<li><a class="menu-btn" href="signin.php" style="color: white;"><i class="bi bi-person" style="color: white;"></i> Sign-In</a></li>
+							<li><a class="menu-btn" href="signup.php" style="color: white;"><i class="bi bi-person" style="color: white;"></i> Sign-up</a></li>
 							
 						</ul>
 					</nav>

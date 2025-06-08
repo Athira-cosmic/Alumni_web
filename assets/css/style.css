@@ -293,7 +293,7 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus {
 .breadcrumb-content h1 {
   font-weight: 400;
   font-size: 72px;
-  color: #FFFFFF;
+  color: black;
 }
 
 .breadcrumb-content p {
@@ -456,7 +456,7 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus {
   position: relative;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  color: #fff;
+  color: black;
 }
 
 .main-nav > ul > li:hover > a:after {
@@ -478,7 +478,7 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus {
           transform: translateY(-20px);
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
-  background: #fff;
+  background: black;
   -webkit-box-shadow: 7px 10px 40px rgba(13, 52, 79, 0.1);
           box-shadow: 7px 10px 40px rgba(13, 52, 79, 0.1);
   border-radius: 4px;
@@ -522,7 +522,7 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus {
   font-size: 20px;
   line-height: 35px;
   text-align: center;
-  color: #fff;
+  color: black;
   font-style: normal;
   position: absolute;
   right: -5px;
@@ -675,7 +675,8 @@ input:-webkit-autofill:hover, input:-webkit-autofill:focus {
 .sticky {
   position: fixed;
   top: 0;
-  background: #000;
+  background: thistle;
+  opacity: 0.75;
   z-index: 999;
   -webkit-animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
           animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;

@@ -474,11 +474,11 @@
     }
 
     .main-nav > ul > li > a.active {
-          color:#fff ;
+          color: black ;
     }
 
     .main-nav > ul > li:hover > a {
-          color:#fff ;
+          color:black ;
     }
 
     .main-nav {
@@ -490,7 +490,7 @@
         z-index: 99999;
         height: 100%;
         overflow: auto;
-        background: lavender;
+        background: thistle;
         border-right: 1px solid #dddddd4f;
         -webkit-overflow-scrolling: touch;
         -webkit-transform: translateX(-250px);
@@ -528,7 +528,7 @@
     }
     .main-nav>ul>li>a {
         font-size: 16px;
-        color: #fff;
+        color: black;
         line-height: 35px;
         margin: 10px 0;
     }
