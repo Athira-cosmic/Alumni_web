@@ -1,32 +1,39 @@
 <?php
 session_start();
-if($_SERVER['REQUEST_METHOD']=='POST'){
-    include 'connect.php';
+include 'connect.php';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $reg_no = $_POST['reg_no'];
+    $password = $_POST['password'];
 
-    // Fetch form data
-    $reg_no=$_POST['reg_no'];
-    $password=$_POST['password'];
+    // Use prepared statement to prevent SQL injection
+    $stmt = $con->prepare("SELECT * FROM admin WHERE reg_no = ? AND password = ?");
+    $stmt->bind_param("ss", $reg_no, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    // Verify admin credentials
-    $sql="SELECT * FROM `admin` WHERE reg_no='$reg_no' AND password='$password'";
-    $result=mysqli_query($con,$sql);
-    
-    if(mysqli_num_rows($result) == 1){
+    if ($result->num_rows === 1) {
         $_SESSION['admin_logged_in'] = true;
-        header('location:admin.php');
-    }else{
-        echo '<div id="popup-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
-              <div id="popup" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); z-index: 1000;">
-                <p style="margin: 0; text-align: center; color: darkblue;"><b>Invalid credentials</b></p>
-                <button onclick="dismissPopup()" style="margin-top: 10px; padding: 5px 10px; background-color: blue; color: white; border-radius: 50px; cursor: pointer;">Dismiss</button>
-              </div>
-              <script>
-                function dismissPopup() {
-                  document.getElementById("popup-overlay").style.display = "none";
-                  document.getElementById("popup").style.display = "none";
-                }
-              </script>';
+        $_SESSION['reg_no'] = $reg_no;
+        header('Location: admin.php');
+        exit();
+    } else {
+        showError();
     }
+}
+
+// Reusable error message
+function showError() {
+    echo '<div id="popup-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+          <div id="popup" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); z-index: 1000;">
+            <p style="margin: 0; text-align: center; color: darkblue;"><b>Invalid credentials</b></p>
+            <button onclick="dismissPopup()" style="margin-top: 10px; padding: 5px 10px; background-color: blue; color: white; border-radius: 50px; cursor: pointer;">Dismiss</button>
+          </div>
+          <script>
+            function dismissPopup() {
+              document.getElementById("popup-overlay").style.display = "none";
+              document.getElementById("popup").style.display = "none";
+            }
+          </script>';
 }
 ?>
 
@@ -150,8 +157,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	</div>
 	<div class="menu-info-wrap d-none d-xxl-block position-absolute">
 		<div class="menu-info-shape position-relative">
-			<img src="assets/images/shape/menu.png" alt="">
-			<a href="https://themeforest.wprealizer.com/cdn-cgi/l/email-protection#e999869b889a9c8788c780878f86a98e84888085c78a8684"><i class="bi bi-envelope-fill"></i> <span class="__cf_email__" data-cfemail="aadac5d8cbd9dfc4cb84c3c4ccc5eacecfc7c584c9c5c7">[email&#160;protected]</span></a>
+			
 		</div>
 		
 	</div>

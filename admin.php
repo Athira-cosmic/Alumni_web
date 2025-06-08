@@ -1,82 +1,79 @@
 <?php
 session_start();
-include 'connect.php';
+include("connect.php");
 
-// Function to fetch pending registration requests
-function fetchPendingRequests($con) {
-    $sql = "SELECT * FROM `registration` WHERE status='pending'";
-    $result = mysqli_query($con, $sql);
-    $requests = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $requests[] = $row;
-    }
-    return $requests;
-}
-
-// Handle approval
-if (isset($_GET['approve'])) {
-    $reg_no = $_GET['approve'];
-    $sql = "UPDATE `registration` SET status='approved' WHERE reg_no='$reg_no'";
-    $result = mysqli_query($con, $sql);
-    if ($result) {
-        header('location:admin.php');
-    } else {
-        echo "Error: " . mysqli_error($con);
-    }
-}
-
-// Handle rejection
-if (isset($_GET['reject'])) {
-    $reg_no = $_GET['reject'];
-    $sql = "UPDATE `registration` SET status='rejected' WHERE reg_no='$reg_no'";
-    $result = mysqli_query($con, $sql);
-    if ($result) {
-        header('location:admin.php');
-    } else {
-        echo "Error: " . mysqli_error($con);
-    }
-}
-
-// Function to fetch pending staff advisors requests
-function fetchPendingStaffRequests($con) {
-    $sql = "SELECT * FROM `staff_advisors` WHERE status='pending'";
-    $result = mysqli_query($con, $sql);
-    $requests = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $requests[] = $row;
-    }
-    return $requests;
-}
-
-// Handle approval
-if (isset($_GET['approve'])) {
-    $reg_no = $_GET['approve'];
-    $sql = "UPDATE `staff_advisors` SET status='approved' WHERE email='$email'";
-    $result = mysqli_query($con, $sql);
-    if ($result) {
-        header('location:admin.php');
-    } else {
-        echo "Error: " . mysqli_error($con);
-    }
-}
-
-// Handle rejection
-if (isset($_GET['reject'])) {
-    $reg_no = $_GET['reject'];
-    $sql = "UPDATE `staff_advisors` SET status='rejected' WHERE email='$email'";
-    $result = mysqli_query($con, $sql);
-    if ($result) {
-        header('location:admin.php');
-    } else {
-        echo "Error: " . mysqli_error($con);
-    }
-}
-
-// Verify admin session
+// Ensure admin is logged in
 if (!isset($_SESSION['admin_logged_in'])) {
     header('location:adminlogin.php');
     exit();
 }
+
+// ---------- Approve/Reject for Alumni ----------
+if (isset($_GET['approve_alumni'])) {
+    $reg_no = $_GET['approve_alumni'];
+    $sql = "UPDATE registration SET status='approved' WHERE reg_no=?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $reg_no);
+    $stmt->execute();
+    header("Location: admin.php");
+    exit();
+}
+
+if (isset($_GET['reject_alumni'])) {
+    $reg_no = $_GET['reject_alumni'];
+    $sql = "UPDATE registration SET status='rejected' WHERE reg_no=?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $reg_no);
+    $stmt->execute();
+    header("Location: admin.php");
+    exit();
+}
+
+// ---------- Approve/Reject for Staff Advisors ----------
+if (isset($_GET['approve_staff'])) {
+    $email = $_GET['approve_staff'];
+    $sql = "UPDATE staff_advisors SET status='approved' WHERE email=?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    header("Location: admin.php");
+    exit();
+}
+
+if (isset($_GET['reject_staff'])) {
+    $email = $_GET['reject_staff'];
+    $sql = "UPDATE staff_advisors SET status='rejected' WHERE email=?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    header("Location: admin.php");
+    exit();
+}
+
+// ---------- Fetch Functions ----------
+function fetchPendingAlumni($con) {
+    $sql = "SELECT * FROM registration WHERE status='pending'";
+    $result = mysqli_query($con, $sql);
+    $requests = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $requests[] = $row;
+    }
+    return $requests;
+}
+
+function fetchPendingStaff($con) {
+    $sql = "SELECT * FROM staff_advisors WHERE status='pending'";
+    $result = mysqli_query($con, $sql);
+    $requests = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $requests[] = $row;
+    }
+    return $requests;
+}
+
+
+// Verify admin session
+
 ?>
 
 <!doctype html>
@@ -218,7 +215,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
 						</div>
 						<ul>
 							<li>
-								<a href="admin_dashboard.php" class="active">Update Notification</a>
+								<a href="admin_update.php" class="active">Update Notification</a>
 							</li>
 							
 							<li>
@@ -267,69 +264,57 @@ if (!isset($_SESSION['admin_logged_in'])) {
 <br>
  <!-- Membership Request -->
  <div class="row">
-        <div class="col-xl-12 col-md-12">
-            <!-- Portlet card -->
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-widgets">
-                        <!-- Card widgets here -->
-                    </div>
-                    <h4 class="header-title mb-0">Member Requests:</h4><br><br>
-                    <div id="memberRequests" class="row">
-                        <?php
-                        $requests = fetchPendingRequests($con);
-                        foreach ($requests as $request) {
-                            echo "<div class='col-lg-4 col-xl-4'>";
-                            echo "<div class='card text-center'>";
-                            echo "<div class='card-body'>";
-                            echo "<img src='assets/images/users/user-1.jpg' class='rounded-circle avatar-lg img-thumbnail' alt='profile-image'>";
-                            echo "<h4 class='mb-0'>" . $request['name'] . "</h4>";
-                            echo "<p class='text-muted'>" . $request['reg_no'] . "</p>";
-                            echo "<a href='admin.php?approve=" . $request['reg_no'] . "' class='btn btn-success btn-xs waves-effect mb-2 waves-light'>ACCEPT</a>";
-                            echo "<a href='admin.php?reject=" . $request['reg_no'] . "' class='btn btn-danger btn-xs waves-effect mb-2 waves-light'>REJECT</a>";
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>";
-                        }
-                        ?>
-                    </div>
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-0">Member Requests:</h4><br><br>
+                <div id="memberRequests" class="row">
+                    <?php
+                    $requests = fetchPendingAlumni($con);
+                    foreach ($requests as $request) {
+                        echo "<div class='col-lg-4 col-xl-4'>";
+                        echo "<div class='card text-center'>";
+                        echo "<div class='card-body'>";
+                        echo "<img src='assets/images/users/user-1.jpg' class='rounded-circle avatar-lg img-thumbnail' alt='profile-image'>";
+                        echo "<h4 class='mb-0'>" . $request['name'] . "</h4>";
+                        echo "<p class='text-muted'>" . $request['reg_no'] . "</p>";
+                        echo "<a href='admin.php?approve_alumni=" . $request['reg_no'] . "' class='btn btn-success btn-xs'>ACCEPT</a> ";
+                        echo "<a href='admin.php?reject_alumni=" . $request['reg_no'] . "' class='btn btn-danger btn-xs'>REJECT</a>";
+                        echo "</div></div></div>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>
     </div>
+</div>
     <!-- Membership Request End -->
     <!-- Staff Advisors Request -->
     <div class="row">
-        <div class="col-xl-12 col-md-12">
-            <!-- Portlet card -->
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-widgets">
-                        <!-- Card widgets here -->
-                    </div>
-                    <h4 class="header-title mb-0">Advisors Requests:</h4><br><br>
-                    <div id="staffRequests" class="row">
-                        <?php
-                        $requests = fetchPendingStaffRequests($con);
-                        foreach ($requests as $request) {
-                            echo "<div class='col-lg-4 col-xl-4'>";
-                            echo "<div class='card text-center'>";
-                            echo "<div class='card-body'>";
-                            echo "<img src='assets/images/users/user-1.jpg' class='rounded-circle avatar-lg img-thumbnail' alt='profile-image'>";
-                            echo "<h4 class='mb-0'>" . $request['name'] . "</h4>";
-                            echo "<p class='text-muted'>" . $request['email'] . "</p>";
-                            echo "<a href='admin.php?approve=" . $request['email'] . "' class='btn btn-success btn-xs waves-effect mb-2 waves-light'>ACCEPT</a>";
-                            echo "<a href='admin.php?reject=" . $request['email'] . "' class='btn btn-danger btn-xs waves-effect mb-2 waves-light'>REJECT</a>";
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>";
-                        }
-                        ?>
-                    </div>
+    <div class="col-xl-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-0">Advisors Requests:</h4><br><br>
+                <div id="staffRequests" class="row">
+                    <?php
+                    $requests = fetchPendingStaff($con);
+                    foreach ($requests as $request) {
+                        echo "<div class='col-lg-4 col-xl-4'>";
+                        echo "<div class='card text-center'>";
+                        echo "<div class='card-body'>";
+                        echo "<img src='assets/images/users/user-1.jpg' class='rounded-circle avatar-lg img-thumbnail' alt='profile-image'>";
+                        echo "<h4 class='mb-0'>" . $request['name'] . "</h4>";
+                        echo "<p class='text-muted'>" . $request['email'] . "</p>";
+                        echo "<a href='admin.php?approve_staff=" . $request['email'] . "' class='btn btn-success btn-xs'>ACCEPT</a> ";
+                        echo "<a href='admin.php?reject_staff=" . $request['email'] . "' class='btn btn-danger btn-xs'>REJECT</a>";
+                        echo "</div></div></div>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>
     </div>
+</div>
     <!-- Staff Advisors Request End -->
 
 <br>

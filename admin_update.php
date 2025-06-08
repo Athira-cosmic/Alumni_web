@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>Welcome</title>
+	<title>Update Notification</title>
 	
 	<link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="20x20">
 
@@ -129,8 +129,7 @@
 	</div>
 	<div class="menu-info-wrap d-none d-xxl-block position-absolute">
 		<div class="menu-info-shape position-relative">
-			<img src="assets/images/shape/menu.png" alt="">
-			<a href="https://themeforest.wprealizer.com/cdn-cgi/l/email-protection#e999869b889a9c8788c780878f86a98e84888085c78a8684"><i class="bi bi-envelope-fill"></i> <span class="__cf_email__" data-cfemail="aadac5d8cbd9dfc4cb84c3c4ccc5eacecfc7c584c9c5c7">[email&#160;protected]</span></a>
+			
 		</div>
 		
 	</div>
