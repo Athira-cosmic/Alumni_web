@@ -308,6 +308,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								<a href="#notification">Notifications</a>
 								
 							</li>
+                            <li>
+	                            <a href="view_alumni_friends.php">View Alumni</a>
+                            </li>
 							
 							<li><a href="logout.html">Logout</a></li>
 						</ul>
