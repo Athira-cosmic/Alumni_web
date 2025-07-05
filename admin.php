@@ -290,15 +290,14 @@ function fetchPendingStaff($con) {
     </div>
 </div>
     <!-- Membership Request End -->
-    <!-- Staff Advisors Request -->
+    <!-- Staff Advisors Request 
     <div class="row">
     <div class="col-xl-12 col-md-12">
         <div class="card">
             <div class="card-body">
                 <h4 class="header-title mb-0">Advisors Requests:</h4><br><br>
                 <div id="staffRequests" class="row">
-                    <?php
-                    $requests = fetchPendingStaff($con);
+                    /* $requests = fetchPendingStaff($con);
                     foreach ($requests as $request) {
                         echo "<div class='col-lg-4 col-xl-4'>";
                         echo "<div class='card text-center'>";
@@ -310,13 +309,12 @@ function fetchPendingStaff($con) {
                         echo "<a href='admin.php?reject_staff=" . $request['email'] . "' class='btn btn-danger btn-xs'>REJECT</a>";
                         echo "</div></div></div>";
                     }
-                    ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
-    <!-- Staff Advisors Request End -->
+    Staff Advisors Request End -->
 
 <br>
 <!-- Announcements-->
@@ -383,6 +381,82 @@ function fetchPendingStaff($con) {
 </div>
 <!-- end row -->
 <!-- Annoucement ends -->
+<br>
+<!-- Meetings start -->
+<div class="row" id="meetings">
+    <div class="col-xl-6" style="width:100%">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-0">Schedule Alumni Meeting:</h4><br><br>
+                
+                <form action="create_meeting.php" id="meetingForm" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" name="title" class="form-control" placeholder="e.g., Annual Alumni Meetup" required>
+
+                        <label class="form-label mt-3">Date</label>
+                        <input type="date" name="meeting_date" class="form-control" required>
+
+                        <label class="form-label mt-3">Time</label>
+                        <input type="time" name="meeting_time" class="form-control" required>
+
+                        <label class="form-label mt-3">Venue / Joining Link</label>
+                        <input type="text" name="venue" class="form-control" placeholder="e.g., Main Hall / Zoom Link" required>
+
+                        <label class="form-label mt-3">Description (Optional)</label>
+                        <textarea name="description" class="form-control" rows="4" placeholder="Meeting agenda or notes..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-success mt-3">
+                        <i class="mdi mdi-send-outline me-1"></i> Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Show Upcoming + Past Meetings -->
+<div class="row mt-5">
+    <div class="col-xl-12">
+        <h4>Manage Scheduled Meetings</h4>
+        <?php
+        $query = mysqli_query($con, "SELECT * FROM meetings ORDER BY meeting_date DESC");
+        $today = strtotime(date('Y-m-d'));
+
+        while ($meeting = mysqli_fetch_assoc($query)):
+            $meetingDate = strtotime($meeting['meeting_date']);
+        ?>
+            <div class="card p-3 mt-3">
+                <h5><?= htmlspecialchars($meeting['title']) ?></h5>
+                <p><strong>Date:</strong> <?= htmlspecialchars($meeting['meeting_date']) ?><br>
+                   <strong>Time:</strong> <?= htmlspecialchars($meeting['meeting_time']) ?><br>
+                   <strong>Venue:</strong> <?= htmlspecialchars($meeting['venue']) ?><br>
+                   <strong>Description:</strong> <?= nl2br(htmlspecialchars($meeting['description'])) ?></p>
+
+                <?php if ($meetingDate < $today): ?>
+                    <p class="text-muted">This is a past meeting.</p>
+
+                    <?php if (empty($meeting['minutes_file'])): ?>
+                        <!-- Upload minutes form -->
+                        <form action="upload_minutes.php" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="meeting_id" value="<?= $meeting['id'] ?>">
+                            <label>Upload Minutes (PDF):</label>
+                            <input type="file" name="minutes_file" accept=".pdf" required>
+                            <button type="submit" class="btn btn-sm btn-primary mt-2">Upload</button>
+                        </form>
+                    <?php else: ?>
+                        <p><strong>Minutes:</strong> <a href="<?= htmlspecialchars($meeting['minutes_file']) ?>" target="_blank">View PDF</a></p>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <span class="badge bg-success">Upcoming Meeting</span>
+                <?php endif; ?>
+            </div>
+        <?php endwhile; ?>
+    </div>
+</div>
+<!-- Meetings end -->
+ 
 <!-- Footer Area Start -->
 
 <div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-color: #F6F6F6;">

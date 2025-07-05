@@ -311,6 +311,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <li>
 	                            <a href="view_alumni_friends.php">View Alumni</a>
                             </li>
+                            <li>
+	                            <a href="alumni_meetings.php">Meetings</a>
+                            </li>
 							
 							<li><a href="logout.html">Logout</a></li>
 						</ul>
