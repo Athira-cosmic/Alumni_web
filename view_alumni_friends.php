@@ -82,6 +82,24 @@ if (mysqli_num_rows($result) > 0) {
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
     <style>
+        
+		.main-nav ul {
+  			display: flex;
+  			flex-wrap: nowrap;              /* Prevent wrapping */
+  			overflow-x: auto;               /* Allow horizontal scroll */
+  			white-space: nowrap;            /* Force items to stay inline */
+  			gap: 20px;
+  			padding: 20px 0;
+  			margin: 0;
+  			list-style: none;
+  			scrollbar-width: none;          /* Hide scrollbar for Firefox */
+		}
+
+
+		.main-nav ul li {
+  			flex-shrink: 0;                 /* Prevent shrinking */
+		}
+
         .table-responsive {
     width: 100%;
     overflow-x: auto;
@@ -432,6 +450,48 @@ if (mysqli_num_rows($result) > 0) {
 		</div>
 	</div>
 </div>
+<!-- Footer Area Start -->
+
+<div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-image: url('assets/images/shape/footer-2.jpg');">
+	<div class="container">
+		<div class="row align-items-center footer-border">
+			<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+				<div class="footer-logo-wrap" style="background-image: url('assets/images/shape/footer-1.jpg');">
+					<!-- <div class="footer-logo"> -->
+						<!-- <a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a> -->
+					<!-- </div> -->
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mobt-24">
+				<div class="footer-social text-lg-end">
+					<p>Connect With Us</p>
+					<ul>
+						<li><a href="https://lbt.ac.in/"><i class="bi bi-globe2"></i></a></li>
+						<li><a href="https://www.facebook.com/lbsitwpoojappura?mibextid=ZbWKwL"><i class="bi bi-facebook"></i></a></li>
+						<li><a href="https://www.instagram.com/lbsitw_trivandrum/"><i class="bi bi-instagram"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xl-12 col-lg-12 col-sm-12 col-12">
+				<div class="footer-wrap">
+					<div class="row justify-content-between">
+						
+						
+						<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+							<h2 style="color: black;text-align: right;padding-right:80px;">Made With <span id="boot-icon" class="bi bi-heart-fill" style="font-size: 3rem; color: rgb(255, 0, 0);"></span></h2>
+							<p style="color: black";>Copyright &copy; 2025. Design and Development by WEBCRAFTERS LBSITW</p>
+						</div>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- Footer Area End -->
 <!-- Jquery JS -->
 <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery-3.6.0.min.js"></script>

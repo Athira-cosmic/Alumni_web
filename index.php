@@ -43,22 +43,21 @@ if ($row = mysqli_fetch_assoc($result)) {
 	<link rel="stylesheet" href="assets/css/responsive.css">
 	<style>
 		.main-nav ul {
-  display: flex;
-  flex-wrap: nowrap;              /* Prevent wrapping */
-  overflow-x: auto;               /* Allow horizontal scroll */
-  white-space: nowrap;            /* Force items to stay inline */
-  gap: 20px;
-  padding: 20px 0;
-  margin: 0;
-  list-style: none;
-  scrollbar-width: none;          /* Hide scrollbar for Firefox */
-}
+  			display: flex;
+  			flex-wrap: nowrap;              /* Prevent wrapping */
+  			overflow-x: auto;               /* Allow horizontal scroll */
+  			white-space: nowrap;            /* Force items to stay inline */
+  			gap: 20px;
+  			padding: 20px 0;
+  			margin: 0;
+  			list-style: none;
+  			scrollbar-width: none;          /* Hide scrollbar for Firefox */
+		}
 
 
-.main-nav ul li {
-  flex-shrink: 0;                 /* Prevent shrinking */
-}
-
+		.main-nav ul li {
+  			flex-shrink: 0;                 /* Prevent shrinking */
+		}
 	</style>
 	
 

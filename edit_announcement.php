@@ -274,13 +274,13 @@ if (isset($_GET['id'])) {
 <!-- Annoucement ends -->
 <!-- Footer Area Start -->
 
-<div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-color: #F6F6F6;">
+<div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-image: url('assets/images/shape/footer-2.jpg');">
 	<div class="container">
 		<div class="row align-items-center footer-border">
 			<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-				<div class="footer-logo-wrap" style="background-color: #f6f6f6;">
+				<div class="footer-logo-wrap" style="background-image: url('assets/images/shape/footer-1.jpg');">
 					<!-- <div class="footer-logo"> -->
-						<!-- <a href="index.php"><img src="assets/images/collegelogo2.png" alt=""></a> -->
+						<!-- <a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a> -->
 					<!-- </div> -->
 				</div>
 			</div>
@@ -302,8 +302,8 @@ if (isset($_GET['id'])) {
 						
 						
 						<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
-							<h2 style="color: #f6f6f6;text-align: right;padding-right:80px;">Made With <span id="boot-icon" class="bi bi-heart-fill" style="font-size: 3rem; color: rgb(255, 0, 0);"></span></h2>
-                            <p style="color: white";>Copyright &copy; 2025. Design and Development by WEB TEAM LBSITW</p>
+							<h2 style="color: black;text-align: right;padding-right:80px;">Made With <span id="boot-icon" class="bi bi-heart-fill" style="font-size: 3rem; color: rgb(255, 0, 0);"></span></h2>
+							<p style="color: black";>Copyright &copy; 2025. Design and Development by WEBCRAFTERS LBSITW</p>
 						</div>
 						
 						</div>
@@ -313,17 +313,7 @@ if (isset($_GET['id'])) {
 		</div>
 	</div>
 </div>
-<div class="copy-right-area" style="background: #1A064E;">
-	<div class="container">
-		<div class="row">
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-				<div class="copy-text copy-text-2 text-center">
-					
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+
 <!-- Footer Area End -->
 
 
