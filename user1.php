@@ -208,13 +208,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     opacity: 1;
 }
         #editProfileBtn {
-            display: inline-block;
-            margin: 20px;
-            padding: 10px 20px;
             
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
+            color: black;
+        
         }
         #notifications-container {
 			background-color: 1px solid #19075f;

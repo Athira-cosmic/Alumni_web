@@ -276,7 +276,6 @@ if (mysqli_num_rows($result) > 0) {
 							<li>
 								<a href="user1.php" class="active">Dashboard</a>
 							</li>
-							<li><a href="#" id="editProfileBtn">Edit Profile</a></li>
 							
 							<li>
 								<a href="#notification">Notifications</a>
