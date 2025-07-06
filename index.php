@@ -122,7 +122,7 @@
 
 			<div class="col-xxl-8 col-xl-10 col-lg-11 col-md-12 col-sm-12 col-12">
 				<div class="hero-content hero-content-style-3 text-center">
-					<h1>LBS Institute Of Technology For Women</h1>
+					<h1>LBSITW Alumni Association (LITAA)</h1>
 				</div>
 			</div>
 		</div>
