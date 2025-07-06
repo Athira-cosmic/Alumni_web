@@ -310,7 +310,7 @@ if (mysqli_num_rows($result) > 0) {
     	<div class="row align-items-center">
          	<div class="col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
             	<div class="breadcrumb-content">
-				<h1> <?php echo isset($name) ? $name : ''; ?>!!!</h1>
+				<h1> <?php echo isset($name) ? $name : ''; ?>Find your friends here</h1>
             	</div>
         	</div>
 			
