@@ -25,6 +25,8 @@ if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && 
 		$staff_advisor = $user_details['staff_advisor'];
         $email = $user_details['email'];
 		$linkedin = $user_details['linkedin'];
+        $profile_image = !empty($user_details['profile_image']) ? $user_details['profile_image'] : 'assets/images/users/user-1.jpg';
+
     } else {
         // User not found in the database, handle this case accordingly
         echo "User not found in the database.";
@@ -357,7 +359,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		<div class="col-lg-4">
 		  <div class="card shadow-sm">
 			<div class="card-header bg-transparent text-center">
-			  <img class="profile_img" src="assets/images/users/user-1.jpg" alt="student dp">
+			  <img class="profile_img" src="<?php echo htmlspecialchars($profile_image); ?>" alt="Profile Image" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
 			  <h3><?php echo $name; ?></h3>
 			</div>
 		  </div>
