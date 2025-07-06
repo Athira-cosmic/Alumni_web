@@ -387,56 +387,7 @@ if (mysqli_num_rows($result) > 0) {
 </table>
 </div>
 <button id="downloadBtn">Download CSV</button>
-<div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-color: #F6F6F6;">
-	<div class="container">
-		<div class="row align-items-center footer-border">
-			<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-				<div class="footer-logo-wrap" style="background-color: #f6f6f6;">
-					<!-- <div class="footer-logo"> -->
-						<!-- <a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a> -->
-					<!-- </div> -->
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mobt-24">
-				<div class="footer-social text-lg-end">
-					<p>Connect With Us</p>
-					<ul>
-						<li><a href="https://lbt.ac.in/"><i class="bi bi-globe2"></i></a></li>
-						<li><a href="https://www.facebook.com/lbsitwpoojappura?mibextid=ZbWKwL"><i class="bi bi-facebook"></i></a></li>
-						<li><a href="https://www.instagram.com/lbsitw_trivandrum/"><i class="bi bi-instagram"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xl-12 col-lg-12 col-sm-12 col-12">
-				<div class="footer-wrap">
-					<div class="row justify-content-between">
-						
-						
-						<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
-							<h2 style="color: #f6f6f6;text-align: right;padding-right:80px;">Made With <span id="boot-icon" class="bi bi-heart-fill" style="font-size: 3rem; color: rgb(255, 0, 0);"></span></h2>
-                            <p style="color: white";>Copyright &copy; 2025. Design and Development by WEB TEAM LBSITW</p>
-						</div>
-						
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="copy-right-area" style="background: #1A064E;">
-	<div class="container">
-		<div class="row">
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-				<div class="copy-text copy-text-2 text-center">
-					
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+
 <!-- Footer Area Start -->
 
 <div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-image: url('assets/images/shape/footer-2.jpg');">
