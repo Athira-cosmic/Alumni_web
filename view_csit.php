@@ -3,7 +3,7 @@ session_start();
 include("connect.php");
 
 if (!isset($_SESSION['admin_logged_in'])) {
-    header("Location: admin.php");
+    header("Location: hod_csit.php");
     exit();
 }
 
@@ -13,7 +13,7 @@ $filter_course = $_GET['course'] ?? '';
 $filter_department = $_GET['department'] ?? '';
 
 // Build query
-$sql = "SELECT * FROM registration WHERE status='approved'";
+$sql = "SELECT * FROM registration WHERE department IN ('CSE', 'IT') AND status='approved'";
 if ($filter_year) {
     $sql .= " AND year_of_passout = '$filter_year'";
 }
@@ -251,19 +251,14 @@ if (mysqli_num_rows($result) > 0) {
 						</div>
 						<ul>
                             <li><a href="index.php">Home</a></li>
-							<li>
-								<a href="admin_update.php">Update Notification</a>
-							</li>
-							
-							<li>
-								<a href="#notify">Announcements</a>
-								
-							</li>
                             <li>
-	                            <a href="view_alumni.php">View Alumni</a>
+	                            <a href="hod_csit.php">Dashboard</a>
                             </li>
                             <li>
-	                            <a href="meetings.php">Meetings</a>
+	                            <a href="view_csit.php">View Alumni</a>
+                            </li>
+                            <li>
+	                            <a href="logout.html">Logout</a>
                             </li>
 						</ul>
 					</nav>
@@ -326,10 +321,7 @@ if (mysqli_num_rows($result) > 0) {
         <select name="department" onchange="submitOnChange()">
             <option value="">-- Select --</option>
             <option value="CSE" <?= $filter_department == 'CSE' ? 'selected' : '' ?>>CSE</option>
-            <option value="ECE" <?= $filter_department == 'ECE' ? 'selected' : '' ?>>ECE</option>
             <option value="IT" <?= $filter_department == 'IT' ? 'selected' : '' ?>>IT</option>
-            <option value="Civil" <?= $filter_department == 'Civil' ? 'selected' : '' ?>>Civil</option>
-            <option value="AE/I" <?= $filter_department == 'AE/I' ? 'selected' : '' ?>>AE/I</option>
         </select>
     <?php endif; ?>
 

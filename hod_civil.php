@@ -2,47 +2,72 @@
 session_start();
 include("connect.php");
 
-// Ensure admin is logged in
-if (!isset($_SESSION['admin_logged_in'])) {
+// Check login
+if (!isset($_SESSION['admin_logged_in']) || !isset($_SESSION['reg_no'])) {
     header('location:adminlogin.php');
     exit();
 }
 
-// ---------- Approve/Reject for Alumni ----------
-/*if (isset($_GET['approve_alumni'])) {
+// Map reg_no to admin_id
+$admin_reg_no = $_SESSION['reg_no'];
+$admin_id = null;
+
+switch ($admin_reg_no) {
+    case 'CSIT2001':
+        $admin_id = 2; break;
+    case 'ECERE2001':
+        $admin_id = 3; break;
+    case 'CE2001':
+        $admin_id = 4; break;
+    default:
+        header('location:admin.php'); exit();
+}
+
+// Approve
+if (isset($_GET['approve_alumni'])) {
     $reg_no = $_GET['approve_alumni'];
-    $sql = "UPDATE registration SET status='approved' WHERE reg_no=?";
-    $stmt = $con->prepare($sql);
+    $stmt = $con->prepare("UPDATE registration SET status='approved' WHERE reg_no = ?");
     $stmt->bind_param("s", $reg_no);
     $stmt->execute();
-    header("Location: admin.php");
+    header("Location: hod_civil.php");
     exit();
 }
 
+// Reject
 if (isset($_GET['reject_alumni'])) {
     $reg_no = $_GET['reject_alumni'];
-    $sql = "UPDATE registration SET status='rejected' WHERE reg_no=?";
-    $stmt = $con->prepare($sql);
+    $stmt = $con->prepare("UPDATE registration SET status='rejected' WHERE reg_no = ?");
     $stmt->bind_param("s", $reg_no);
     $stmt->execute();
-    header("Location: admin.php");
+    header("Location: hod_civil.php");
     exit();
 }
 
+// Fetch alumni
+function fetchPendingAlumni($con, $admin_id) {
+    $departments = [];
 
-// ---------- Fetch Functions ----------
-function fetchPendingAlumni($con) {
-    $sql = "SELECT * FROM registration WHERE status='pending'";
-    $result = mysqli_query($con, $sql);
-    $requests = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $requests[] = $row;
+    switch ($admin_id) {
+        case 2: $departments = ['CSE', 'IT']; break;
+        case 3: $departments = ['ECE', 'AE&I', 'ERE']; break;
+        case 4: $departments = ['Civil']; break;
+        default: return [];
     }
-    return $requests;
+
+    $placeholders = implode(',', array_fill(0, count($departments), '?'));
+    $types = str_repeat('s', count($departments));
+
+    $sql = "SELECT * FROM registration WHERE status='pending' AND department IN ($placeholders)";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param($types, ...$departments);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->fetch_all(MYSQLI_ASSOC);
 }
-*/
 
-
+$pending_alumni = fetchPendingAlumni($con, $admin_id);
+?>
 
 // Verify admin session
 
@@ -196,7 +221,7 @@ function fetchPendingAlumni($con) {
 								
 							</li>
                             <li>
-	                            <a href="view_alumni.php">View Alumni</a>
+	                            <a href="view_civil.php">View Alumni</a>
                             </li>
 						</ul>
 					</nav>
@@ -235,147 +260,34 @@ function fetchPendingAlumni($con) {
 <!--  Header area end -->
 
 <br>
-<br>
-<!-- Announcements-->
-<div class="row" id="notify">
-    <div class="col-xl-6" style="width:100%">
+ <!-- Membership Request -->
+ <div class="row">
+    <div class="col-xl-12 col-md-12">
         <div class="card">
             <div class="card-body">
-                <div class="card-widgets">
-                    <a href="javascript: void(0);" data-bs-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                    <a data-bs-toggle="collapse" href="#cardCollpase4" role="button" aria-expanded="false" aria-controls="cardCollpase4"><i class="mdi mdi-minus"></i></a>
-                    <a href="javascript: void(0);" data-bs-toggle="remove"><i class="mdi mdi-close"></i></a>
+                <h4 class="header-title mb-0">Member Requests:</h4><br><br>
+                <div id="memberRequests" class="row">
+                    <?php
+                    $requests = fetchPendingAlumni($con, $admin_id);
+                    foreach ($requests as $request) {
+                        echo "<div class='col-lg-4 col-xl-4'>";
+                        echo "<div class='card text-center'>";
+                        echo "<div class='card-body'>";
+                        echo "<img src='assets/images/users/user-1.jpg' class='rounded-circle avatar-lg img-thumbnail' alt='profile-image'>";
+                        echo "<h4 class='mb-0'>" . $request['name'] . "</h4>";
+                        echo "<p class='text-muted'>" . $request['reg_no'] . "</p>";
+                        echo "<a href='hod_civil.php?approve_alumni=" . $request['reg_no'] . "' class='btn btn-success btn-xs'>ACCEPT</a> ";
+                        echo "<a href='hod_civil.php?reject_alumni=" . $request['reg_no'] . "' class='btn btn-danger btn-xs'>REJECT</a>";
+                        echo "</div></div></div>";
+                    }
+                    ?>
                 </div>
-                <h4 class="header-title mb-0">Announcements:</h4><br><br>
-                <form action="create_announcement.php" id="announcementForm" method="POST" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="validationCustom01" class="form-label">Title</label>
-                        <input type="text" name="title" class="form-control" id="validationCustom01" placeholder="Events" required />
-                    </div>
-                    <label>Image</label>
-                    <input type="file" name="image"><br><br>
-                    <div class="col-xl-6 col-lg-12 order-lg-2 order-xl-1" style="width: 100%;">
-                        <!-- new post -->
-                        <div class="card">
-                            <div class="card-body p-0">
-                                <ul class="nav nav-tabs nav-bordered">
-                                    <li class="nav-item">
-                                        <a href="#newpost" data-bs-toggle="tab" aria-expanded="false" class="nav-link active px-3 py-2">
-                                            <i class="mdi mdi-pencil-box-multiple font-18 d-md-none d-block"></i>
-                                            <span class="d-none d-md-block">Create Post</span>
-                                        </a>
-                                    </li>
-                                </ul> <!-- end nav-->
-                                <div class="tab-content pt-0">
-                                    <div class="tab-pane show active p-3" id="newpost">
-                                        <!-- comment box -->
-                                        <div class="border rounded">
-                                            <!-- Input field for writing something -->
-                                            <div class="mb-3">
-                                                <input type="text" class="form-control" id="writeSomething" name="write_something" placeholder="Write something...">
-                                            </div>
-                                            <!-- End input field -->
-                                            <div class="p-2 bg-light d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-image-outline"></i></a>
-                                                    <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-crosshairs-gps"></i></a>
-                                                    <a href="#" class="btn btn-sm px-2 font-16 btn-light"><i class="mdi mdi-attachment"></i></a>
-                                                </div>
-                                                <button type="submit" class="btn btn-sm btn-success"><i class='mdi mdi-send-outline me-1'></i>Post</button>
-                                            </div>
-                                        </div> <!-- end .border-->
-                                        <!-- end comment box -->
-                                    </div> <!-- end preview-->
-                                </div> <!-- end tab-content-->
-                            </div>
-                        </div>
-                        <!-- end new post -->
-                    </div>
-                </form>
-                <div id="success_message" style="color: green;"></div>
-                
-            </div> <!-- end card-body -->
-        </div> <!-- end card-->
-    </div> <!-- end col -->
-</div>
-<!-- end row -->
-<!-- Annoucement ends -->
-<br>
-<!-- Meetings start -->
-<div class="row" id="meetings">
-    <div class="col-xl-6" style="width:100%">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="header-title mb-0">Schedule Alumni Meeting:</h4><br><br>
-                
-                <form action="create_meeting.php" id="meetingForm" method="POST">
-                    <div class="mb-3">
-                        <label class="form-label">Title</label>
-                        <input type="text" name="title" class="form-control" placeholder="e.g., Annual Alumni Meetup" required>
-
-                        <label class="form-label mt-3">Date</label>
-                        <input type="date" name="meeting_date" class="form-control" required>
-
-                        <label class="form-label mt-3">Time</label>
-                        <input type="time" name="meeting_time" class="form-control" required>
-
-                        <label class="form-label mt-3">Venue / Joining Link</label>
-                        <input type="text" name="venue" class="form-control" placeholder="e.g., Main Hall / Zoom Link" required>
-
-                        <label class="form-label mt-3">Description (Optional)</label>
-                        <textarea name="description" class="form-control" rows="4" placeholder="Meeting agenda or notes..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-success mt-3">
-                        <i class="mdi mdi-send-outline me-1"></i> Submit
-                    </button>
-                </form>
             </div>
         </div>
     </div>
 </div>
+    <!-- Membership Request End -->
 
-<!-- Show Upcoming + Past Meetings -->
-<div class="row mt-5">
-    <div class="col-xl-12">
-        <h4>Manage Scheduled Meetings</h4>
-        <?php
-        $query = mysqli_query($con, "SELECT * FROM meetings ORDER BY meeting_date DESC");
-        $today = strtotime(date('Y-m-d'));
-
-        while ($meeting = mysqli_fetch_assoc($query)):
-            $meetingDate = strtotime($meeting['meeting_date']);
-        ?>
-            <div class="card p-3 mt-3">
-                <h5><?= htmlspecialchars($meeting['title']) ?></h5>
-                <p><strong>Date:</strong> <?= htmlspecialchars($meeting['meeting_date']) ?><br>
-                   <strong>Time:</strong> <?= htmlspecialchars($meeting['meeting_time']) ?><br>
-                   <strong>Venue:</strong> <?= htmlspecialchars($meeting['venue']) ?><br>
-                   <strong>Description:</strong> <?= nl2br(htmlspecialchars($meeting['description'])) ?></p>
-
-                <?php if ($meetingDate < $today): ?>
-                    <p class="text-muted">This is a past meeting.</p>
-
-                    <?php if (empty($meeting['minutes_file'])): ?>
-                        <!-- Upload minutes form -->
-                        <form action="upload_minutes.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="meeting_id" value="<?= $meeting['id'] ?>">
-                            <label>Upload Minutes (PDF):</label>
-                            <input type="file" name="minutes_file" accept=".pdf" required>
-                            <button type="submit" class="btn btn-sm btn-primary mt-2">Upload</button>
-                        </form>
-                    <?php else: ?>
-                        <p><strong>Minutes:</strong> <a href="<?= htmlspecialchars($meeting['minutes_file']) ?>" target="_blank">View PDF</a></p>
-                    <?php endif; ?>
-                <?php else: ?>
-                    <span class="badge bg-success">Upcoming Meeting</span>
-                <?php endif; ?>
-            </div>
-        <?php endwhile; ?>
-    </div>
-</div>
-<!-- Meetings end -->
- 
 <!-- Footer Area Start -->
 
 <div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-color: #F6F6F6;">

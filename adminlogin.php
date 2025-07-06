@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'connect.php';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $reg_no = $_POST['reg_no'];
     $password = $_POST['password'];
@@ -12,28 +13,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $stmt->get_result();
 
     if ($result->num_rows === 1) {
+        // Store base session
         $_SESSION['admin_logged_in'] = true;
         $_SESSION['reg_no'] = $reg_no;
-        header('Location: admin.php');
+
+        // Determine role or HOD
+        switch ($reg_no) {
+            case 'CSIT2001':
+                $_SESSION['admin_id'] = 2;
+                header('Location: hod_csit.php');
+                break;
+            case 'ECERE2001':
+                $_SESSION['admin_id'] = 3;
+                header('Location: hod_ece.php');
+                break;
+            case 'CE2001':
+                $_SESSION['admin_id'] = 4;
+                header('Location: hod_civil.php');
+                break;
+            default:
+                $_SESSION['admin_id'] = 1; // Super Admin
+                header('Location: admin.php');
+                break;
+        }
         exit();
     } else {
-        showError();
+        echo "<script>alert('Invalid credentials'); window.location.href='adminlogin.php';</script>";
+        exit();
     }
-}
-
-// Reusable error message
-function showError() {
-    echo '<div id="popup-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
-          <div id="popup" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); z-index: 1000;">
-            <p style="margin: 0; text-align: center; color: darkblue;"><b>Invalid credentials</b></p>
-            <button onclick="dismissPopup()" style="margin-top: 10px; padding: 5px 10px; background-color: blue; color: white; border-radius: 50px; cursor: pointer;">Dismiss</button>
-          </div>
-          <script>
-            function dismissPopup() {
-              document.getElementById("popup-overlay").style.display = "none";
-              document.getElementById("popup").style.display = "none";
-            }
-          </script>';
 }
 ?>
 
