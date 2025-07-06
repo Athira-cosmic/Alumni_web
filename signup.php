@@ -1,6 +1,34 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include 'connect.php';
+	$target_dir = "profile_images/";
+$image_path = null;
+
+if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+    $fileTmpPath = $_FILES['profile_image']['tmp_name'];
+    $fileName = $_FILES['profile_image']['name'];
+    $fileSize = $_FILES['profile_image']['size'];
+    $fileType = $_FILES['profile_image']['type'];
+    $fileNameCmps = explode(".", $fileName);
+    $fileExtension = strtolower(end($fileNameCmps));
+
+    // Allowed extensions
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $maxSize = 2 * 1024 * 1024; // 2MB
+
+    if (in_array($fileExtension, $allowedExtensions) && $fileSize <= $maxSize) {
+        $newFileName = uniqid('alumni_', true) . '.' . $fileExtension;
+        $uploadFilePath = $target_dir . $newFileName;
+
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0755, true);
+        }
+
+        if (move_uploaded_file($fileTmpPath, $uploadFilePath)) {
+            $image_path = $uploadFilePath;
+        }
+    }
+}
 
     // Fetch and sanitize all fields
     $reg_no = mysqli_real_escape_string($con, $_POST['reg_no']);
@@ -25,12 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = 'pending';
 
     $sql = "INSERT INTO registration 
-        (reg_no, name, email, linkedin, password, ph_no, address_line1, address_line2, city, state, postal_code, country, year_of_passout, course, department, staff_advisor, company, designation, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        (reg_no, name, email, linkedin, password, ph_no, address_line1, address_line2, city, state, postal_code, country, year_of_passout, course, department, staff_advisor, company, designation, status, profile_image)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		$stmt = mysqli_prepare($con, $sql);
-		mysqli_stmt_bind_param($stmt, "ssssssssssssissssss", 
-    $reg_no, $name, $email, $linkedin, $password, $ph_no, $address_line1, $address_line2, $city, $state, $postal_code, $country, $year_of_passout, $course, $department, $staff_advisor, $company, $designation, $status);
+		mysqli_stmt_bind_param($stmt, "ssssssssssssisssssss", 
+    $reg_no, $name, $email, $linkedin, $password, $ph_no, $address_line1, $address_line2, $city, $state, $postal_code, $country, $year_of_passout, $course, $department, $staff_advisor, $company, $designation, $status, $image_path);
 
 		if (mysqli_stmt_execute($stmt)) {
     		header('Location: signin.php');
@@ -229,7 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                
                
             </div>
-            <form id="signupForm" action="signup.php" method="post" class="contact-input mt-5 position-relative">
+            <form id="signupForm" action="signup.php" method="post" enctype="multipart/form-data" class="contact-input mt-5 position-relative">
 
   				<!-- Step 1 -->
   				<div class="form-step active">
@@ -246,6 +274,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     				<label>LinkedIn</label>
     				<input type="text" name="linkedin" placeholder="Linkedin">
     				<br><br>
+					<label for="profile_image">Profile Image (Optional, Max: 2MB)</label>
+    				<input type="file" name="profile_image" id="profile_image" accept="image/*">
+					<br><>
     				<button type="button" class="next-btn">Next</button>
   				</div>
 

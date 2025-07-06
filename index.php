@@ -1,3 +1,13 @@
+<?php
+include("connect.php");
+
+$totalAlumni = 0;
+$sql = "SELECT COUNT(*) as total FROM registration WHERE status = 'approved'";
+$result = mysqli_query($con, $sql);
+if ($row = mysqli_fetch_assoc($result)) {
+    $totalAlumni = $row['total'];
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -5,7 +15,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<title>LBSITW-Home Page</title>
+	<title>LITAA-Home Page</title>
 	
 	<link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="20x20">
 
@@ -31,6 +41,25 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 	<!-- Responsive CSS -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
+	<style>
+		.main-nav ul {
+  display: flex;
+  flex-wrap: nowrap;              /* Prevent wrapping */
+  overflow-x: auto;               /* Allow horizontal scroll */
+  white-space: nowrap;            /* Force items to stay inline */
+  gap: 20px;
+  padding: 20px 0;
+  margin: 0;
+  list-style: none;
+  scrollbar-width: none;          /* Hide scrollbar for Firefox */
+}
+
+
+.main-nav ul li {
+  flex-shrink: 0;                 /* Prevent shrinking */
+}
+
+	</style>
 	
 
 </head>
@@ -97,6 +126,7 @@
 							
 							<li><a class="menu-btn" href="signin.php" style="color: white;"><i class="bi bi-person" style="color: white;"></i> Sign-In</a></li>
 							<li><a class="menu-btn" href="signup.php" style="color: white;"><i class="bi bi-person" style="color: white;"></i> Sign-up</a></li>
+							<li><a class="menu-btn" href="adminlogin.php" style="color: white;"><i class="bi bi-person" style="color: white;"></i> ADMIN</a></li>
 							
 						</ul>
 					</nav>
@@ -122,7 +152,7 @@
 
 			<div class="col-xxl-8 col-xl-10 col-lg-11 col-md-12 col-sm-12 col-12">
 				<div class="hero-content hero-content-style-3 text-center">
-					<h1>LBSITW Alumni Association (LITAA)</h1>
+					<h1>LBS Institute of Technology Alumni Association (LITAA)</h1>
 				</div>
 			</div>
 		</div>
@@ -278,18 +308,18 @@
 				
 			</div>
 			<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
-				<div class="counter-item-wrap text-center">
-					<div class="counter-item d-flex align-items-center justify-content-center">
-						<h1 class="odometer" data-odometer-final="5.1">.</h1>
-						<em>K+</em>
-					</div>
-					<h3>Total Alumni</h3>
-				</div>
+    			<div class="counter-item-wrap text-center">
+        			<div class="counter-item d-flex align-items-center justify-content-center">
+            			<h1 class="odometer" data-odometer-final="<?= $totalAlumni ?>"></h1>
+            			<em><?= ($totalAlumni >= 1000) ? 'K+' : '' ?></em>
+        			</div>
+        			<h3>Total Alumni</h3>
+    			</div>
 			</div>
 			<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
 				<div class="counter-item-wrap text-center">
 					<div class="counter-item d-flex align-items-center justify-content-center">
-						<h1 class="odometer" data-odometer-final="450">.</h1>
+						<h1 class="odometer" data-odometer-final="140">.</h1>
 					</div>
 					<h3>Total Teacher</h3>
 				</div>
@@ -411,17 +441,13 @@
    </div>
 <!-- Blog Area End -->
 
-
-
-
-
 <!-- Footer Area Start -->
 
-<div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-color: #F6F6F6;">
+<div class="footer-area footer-area-style-2 footer-area-style-3 mt-120" style="background-image: url('assets/images/shape/footer-2.jpg');">
 	<div class="container">
 		<div class="row align-items-center footer-border">
 			<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-				<div class="footer-logo-wrap" style="background-color: #f6f6f6;">
+				<div class="footer-logo-wrap" style="background-image: url('assets/images/shape/footer-1.jpg');">
 					<!-- <div class="footer-logo"> -->
 						<!-- <a href="index.html"><img src="assets/images/collegelogo2.png" alt=""></a> -->
 					<!-- </div> -->
@@ -445,26 +471,12 @@
 						
 						
 						<div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
-							<h2 style="color: #f6f6f6;text-align: right;padding-right:80px;">Made With <span id="boot-icon" class="bi bi-heart-fill" style="font-size: 3rem; color: rgb(255, 0, 0);"></span></h2>
-							<p style="color: white";>Copyright &copy; 2025. Design and Development by WEB TEAM LBSITW</p>
+							<h2 style="color: black;text-align: right;padding-right:80px;">Made With <span id="boot-icon" class="bi bi-heart-fill" style="font-size: 3rem; color: rgb(255, 0, 0);"></span></h2>
+							<p style="color: black";>Copyright &copy; 2025. Design and Development by WEBCRAFTERS LBSITW</p>
 						</div>
 						
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="copy-right-area" style="background: #1A064E;">
-	<div class="container">
-		<div class="row">
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-				<div class="copy-text copy-text-2 text-center">
-					<li>
-						<a href="adminlogin.php">Admin</a>
-					</li>
-					
 				</div>
 			</div>
 		</div>
